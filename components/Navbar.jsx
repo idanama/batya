@@ -9,14 +9,16 @@ export default function Navbar() {
   return (
     <nav>
       <Box shadow="lg" bg="white" width="full">
-        <Container maxW="xl" centerContent p="3" justifyContent="space-between" flexDir="row">
+        <Container
+          maxW="3xl"
+          w="full"
+          centerContent
+          p="3"
+          justifyContent="space-between"
+          flexDir="row"
+        >
           <Flex flexDir="row" alignItems="center">
-            <Image
-              src="/woman_holding_a_balance_1942.9.97.jpg"
-              width="40"
-              height="40"
-              alt="Batya logo"
-            />
+            <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
             <Text ml="2" fontSize="4xl">
               <h2>Batya</h2>
             </Text>
