@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@500&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&family=Open+Sans&display=swap');
 
 html,
 body {
@@ -15,7 +15,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'David Libre', serif;
+  font-family: 'Varela Round', sans-serif;
 }
 
 * {
