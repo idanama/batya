@@ -8,17 +8,17 @@ https://batya-git-layout.idanama.vercel.app/
 
 Our App designed using the following Frameworks :
 
-###JavaScript:
+##JavaScript:
 Next.js
 React
 Node.js
 
-###DATABASE :
+##DATABASE :
 MySQL
 
-###UI Components:
+##UI Components:
 Chakra UI
 
-### Deployed VIA Vercel
+## Deployed VIA Vercel
 
 Thank you and Enjoy 
