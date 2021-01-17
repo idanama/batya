@@ -7,7 +7,7 @@ export default function Navbar() {
       <Box bg="white" width="full" mb="12" mt="6">
         <Container maxW="3xl" w="full" p="3" borderTop="1px" borderColor="gray.200">
           <Grid autoFlow="column" gap="3" textColor="gray.400" fontSize="sm">
-            <Grid autoFlow="row" gap="1" maxW="xs">
+            <Grid autoFlow="row" gap="1" maxWidth="3xs">
               <Link href="/">Home</Link>
               <Link href="/">Rent</Link>
               <Link href="/">Buy</Link>
