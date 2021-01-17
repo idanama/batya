@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types, react/jsx-props-no-spreading */
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import '../styles/globals.css';
-// import Footer from '../components/Footer';
+import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,7 +13,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ChakraProvider>
         <Navbar />
-        <Component {...pageProps} />
+        <Box minHeight="80vh">
+          <Component {...pageProps} />
+        </Box>
+        <Footer />
       </ChakraProvider>
     </>
   );
