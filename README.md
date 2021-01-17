@@ -13,7 +13,7 @@ Next.js
 React
 Node.js
 
-### DATABASE :
+### DataBase :
 MySQL
 
 ### UI Components:
