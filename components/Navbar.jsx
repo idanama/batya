@@ -46,7 +46,7 @@ export default function Navbar() {
               <MenuButton as={Button}>
                 <FaUser />
               </MenuButton>
-              <MenuList w="fit-content">
+              <MenuList>
                 <MenuItem>Login</MenuItem>
                 <MenuItem>Register</MenuItem>
               </MenuList>
