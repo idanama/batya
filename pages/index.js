@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { FaChevronRight, FaSearch } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 
 export default function Home() {
   return (
@@ -47,7 +47,7 @@ export default function Home() {
             <IconButton aria-label="find" icon={<FaSearch />} size="lg" ml="2" />
           </FormControl>
         </Container>
-        <Image src="/res/shai-pal-unsplash.jpg" layout="fill" objectFit="cover" />
+        <Image src="/res/DJI_0628+edited.jpg" layout="fill" objectFit="cover" className="filter-hero" />
       </Box>
       <Container
         maxW="3xl"

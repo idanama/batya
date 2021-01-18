@@ -22,3 +22,7 @@ h4 {
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
+
+.filter-hero {
+  filter: brightness(0.8);
+}
