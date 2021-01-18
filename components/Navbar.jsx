@@ -17,7 +17,7 @@ export default function Navbar() {
           justifyContent="space-between"
           flexDir="row"
         >
-          <Flex flexDir="row" alignItems="center">
+          <Flex flexDir="row" alignItems="center" >
             <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
             <Text ml="2" fontSize="4xl">
               <h2>Batya</h2>
