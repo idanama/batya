@@ -10,6 +10,6 @@ CREATE TABLE User (
 )
 
 CREATE TABLE property(
-
+   date 
 )
 --DOWN
