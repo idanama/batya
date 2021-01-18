@@ -27,14 +27,12 @@ export default function Navbar() {
           justifyContent="space-between"
           flexDir="row"
         >
-          <Link href="/" passHref>
-            <Flex flexDir="row" alignItems="center" cursor="pointer">
-              <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
-              <Text ml="2" fontSize="4xl">
-                <h2>Batya</h2>
-              </Text>
-            </Flex>
-          </Link>
+          <Flex flexDir="row" alignItems="center" >
+            <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
+            <Text ml="2" fontSize="4xl">
+              <h2>Batya</h2>
+            </Text>
+          </Flex>
           <Grid autoFlow="column" gap="4" position="relative">
             <Link href="/search" passHref>
               <Button variant="ghost">Buy</Button>
