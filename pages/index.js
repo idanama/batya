@@ -47,7 +47,7 @@ export default function Home() {
             <IconButton aria-label="find" icon={<FaSearch />} size="lg" ml="2" />
           </FormControl>
         </Container>
-        <Image src="/res/DJI_0628+edited.jpg" layout="fill" objectFit="cover" className="filter-hero" />
+        <Image src="/res/tel-aviv.jpg" layout="fill" objectFit="cover" className="filter-hero" />
       </Box>
       <Container
         maxW="3xl"
