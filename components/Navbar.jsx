@@ -10,12 +10,20 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useModal,
 } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import CustomModal from './Modal';
+import SignIn from './Signin';
+
 export default function Navbar() {
+  //create a function to show modal
+
+  // pass show modal as prop to modal
+
   return (
     <nav>
       <Box shadow="lg" bg="white" width="full">
@@ -27,7 +35,7 @@ export default function Navbar() {
           justifyContent="space-between"
           flexDir="row"
         >
-          <Flex flexDir="row" alignItems="center" >
+          <Flex flexDir="row" alignItems="center">
             <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
             <Text ml="2" fontSize="4xl">
               <h2>Batya</h2>
@@ -45,13 +53,18 @@ export default function Navbar() {
                 <FaUser />
               </MenuButton>
               <MenuList>
-                <MenuItem>Login</MenuItem>
+                <MenuItem onClick={() => setModal(true)}>Login</MenuItem>
                 <MenuItem>Register</MenuItem>
               </MenuList>
             </Menu>
           </Grid>
         </Container>
       </Box>
+      {modal && (
+        <CustomModal>
+          <SignIn />
+        </CustomModal>
+      )}
     </nav>
   );
 }
