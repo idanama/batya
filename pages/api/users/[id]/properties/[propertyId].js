@@ -1,4 +1,4 @@
-import { query } from '../../../../lib/db';
+import { query } from '../../../../../lib/db';
 
 // main function to handle different request methods for route users/id/properties/id.
 
@@ -30,7 +30,7 @@ export async function getUserById(req, res) {
       FROM user
       WHERE user_id = ?
     `,
-      req.query.id
+      req.query.id,
     );
     return res.json(results[0]);
   } catch (e) {
