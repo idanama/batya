@@ -1,5 +1,7 @@
 import { query } from '../../lib/db';
 
+// main function to handle different request methods for route api/properties.
+
 export default function handler(req, res) {
   switch (req.method) {
     case 'POST':

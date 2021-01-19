@@ -1,5 +1,7 @@
 import { query } from '../../../lib/db';
 
+// main function to handle different request methods for route properties/id.
+
 export default function handler(req, res) {
   switch (req.method) {
     case 'GET':
@@ -19,6 +21,7 @@ export default function handler(req, res) {
       break;
   }
 }
+
 export async function getPropertyById(req, res) {
   try {
     const results = await query(

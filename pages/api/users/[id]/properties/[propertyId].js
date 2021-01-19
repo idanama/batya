@@ -1,4 +1,7 @@
 import { query } from '../../../../lib/db';
+
+// main function to handle different request methods for route users/id/properties/id.
+
 export default function handler(req, res) {
   switch (req.method) {
     case 'GET':
@@ -18,6 +21,7 @@ export default function handler(req, res) {
       break;
   }
 }
+
 export async function getUserById(req, res) {
   try {
     const results = await query(

@@ -1,4 +1,7 @@
 import { query } from '../../../lib/db';
+
+// main function to handle different request methods for route users/id.
+
 export default function handler(req, res) {
   switch (req.method) {
     case 'GET':
