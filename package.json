@@ -21,7 +21,8 @@
     "dotenv": "^8.2.0",
     "serverless": "^2.19.0",
     "serverless-mysql": "^1.5.4",
-    "sqlite": "^4.0.19"
+    "sqlite": "^4.0.19",
+    "swr": "^0.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

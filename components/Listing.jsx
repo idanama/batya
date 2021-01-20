@@ -1,7 +1,17 @@
-import { Container, Grid, Skeleton, Stack, Stat, StatLabel, StatNumber } from '@chakra-ui/react';
+import {
+  Container,
+  Grid,
+  Skeleton,
+  Stack,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
+} from '@chakra-ui/react';
 
 export default function Listing() {
   const listing = {
+    for: 'sale',
     property_id: 'property5',
     data_registered: 2,
     sqm: 85,
@@ -57,7 +67,11 @@ export default function Listing() {
         <Container>
           <Stat>
             <StatNumber>{`${new Intl.NumberFormat().format(listing.price_month)} ₪`}</StatNumber>
-            <StatLabel>{`${listing.type_type}, ${listing.sqm} m², ${listing.rooms} rooms.`}</StatLabel>
+            <StatLabel textTransform="capitalize" display="inline">
+              {listing.type_type}
+            </StatLabel>
+            <StatLabel display="inline">{`, ${listing.sqm} m², ${listing.rooms} rooms.`}</StatLabel>
+            <StatHelpText>{listing.date_available}</StatHelpText>
           </Stat>
         </Container>
       </Stack>
