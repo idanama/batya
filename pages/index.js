@@ -24,7 +24,7 @@ export default function Home() {
         position="relative"
       >
         <Container
-          maxW="3xl"
+          maxW="6xl"
           w="full"
           flexDir="column"
           centerContent
@@ -50,7 +50,7 @@ export default function Home() {
         <Image src="/res/tel-aviv.jpg" layout="fill" objectFit="cover" className="filter-hero" />
       </Box>
       <Container
-        maxW="3xl"
+        maxW="6xl"
         w="full"
         pt={4}
       >
@@ -64,7 +64,7 @@ export default function Home() {
         </Grid>
       </Container>
       <Container
-        maxW="3xl"
+        maxW="6xl"
         w="full"
         pt={4}
       >
