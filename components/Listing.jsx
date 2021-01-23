@@ -116,17 +116,17 @@ export default function Listing() {
     {
       title: 'Renovated',
       name: 'renovated',
-      icon: <FaPaintRoller/>,
+      icon: <FaPaintRoller />,
     },
     {
       title: 'Solar water',
       name: 'solar_water',
       icon: <FaSolarPanel />,
     },
-    {
-      title: 'Accessible',
-      name: 
-    }
+    // {
+    //   title: 'Accessible',
+    //   name:
+    // }
   ];
 
   return (
