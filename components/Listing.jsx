@@ -7,7 +7,24 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
+  Text,
+  SimpleGrid,
+  Box,
 } from '@chakra-ui/react';
+import {
+  FaBurn,
+  FaCity,
+  FaCouch,
+  FaFan,
+  FaMountain,
+  FaParking,
+  FaUmbrellaBeach,
+  FaTree,
+  FaDungeon,
+  FaLongArrowAltUp,
+  FaPaintRoller,
+  FaSolarPanel,
+} from 'react-icons/fa';
 
 export default function Listing() {
   const listing = {
@@ -54,6 +71,64 @@ export default function Listing() {
     // user_user_id: 'user3',
     // property_property_id: 'property5'
   };
+
+  const listingTable = [
+    {
+      title: 'AC',
+      name: 'cooling',
+      icon: <FaFan />,
+    },
+    {
+      title: 'Heating',
+      name: 'heating',
+      icon: <FaBurn />,
+    },
+    {
+      title: 'Furnished',
+      name: 'furnished',
+      icon: <FaCouch />,
+    },
+    {
+      title: 'Parking',
+      name: 'parking_name',
+      icon: <FaParking />,
+    },
+    {
+      title: 'View',
+      name: 'view',
+      icon: {
+        city: <FaCity />,
+        mountain: <FaMountain />,
+        park: <FaTree />,
+        sea: <FaUmbrellaBeach />,
+      },
+    },
+    {
+      title: 'Mamad',
+      name: 'mamad',
+      icon: <FaDungeon />,
+    },
+    {
+      title: 'Elevator',
+      name: 'elevator',
+      icon: <FaLongArrowAltUp />,
+    },
+    {
+      title: 'Renovated',
+      name: 'renovated',
+      icon: <FaPaintRoller/>,
+    },
+    {
+      title: 'Solar water',
+      name: 'solar_water',
+      icon: <FaSolarPanel />,
+    },
+    {
+      title: 'Accessible',
+      name: 
+    }
+  ];
+
   return (
     <Container maxW="3xl" pt={3} pb={3}>
       <Stack direction={['column', 'row']} spacing="2">
@@ -71,7 +146,18 @@ export default function Listing() {
               {listing.type_type}
             </StatLabel>
             <StatLabel display="inline">{`, ${listing.sqm} m², ${listing.rooms} rooms.`}</StatLabel>
-            <StatHelpText>{listing.date_available}</StatHelpText>
+            <Text mt="2" mb="2">
+              {listing.details}
+            </Text>
+            <StatHelpText>{`Available from ${listing.date_available}`}</StatHelpText>
+            <SimpleGrid spacing={2}>
+              {listingTable.map((item) => (
+                <Stack direction="row" alignItems="center" key={item.name} color="gray.600">
+                  <Box fontSize="xl">{item.icon[listing[item.name]] || item.icon}</Box>
+                  <Box>{item.title}</Box>
+                </Stack>
+              ))}
+            </SimpleGrid>
           </Stat>
         </Container>
       </Stack>
