@@ -4,6 +4,8 @@ import {
     HStack, 
     IconButton, 
     Input, 
+    InputGroup, 
+    InputLeftElement, 
     Menu, 
     MenuButton, 
     MenuDivider, 
@@ -13,11 +15,13 @@ import {
     MenuOptionGroup, 
     SimpleGrid, 
     Skeleton, 
+    Stack, 
     Text 
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { FaSearch } from 'react-icons/fa';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import Card from '../components/Card';
 
 export default function Search() {
     return (
@@ -32,10 +36,49 @@ export default function Search() {
                 </FormControl>
                 <Menu>
                     <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        Home Type
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem>House</MenuItem>
+                        <MenuItem>Appartment</MenuItem>
+                    </MenuList>
+                </Menu>
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                         Price
                     </MenuButton>
                     <MenuList>
+                        <Stack isInline align='baseline'>
+                            <Text fontSize='md'>Until</Text>
+                            <InputGroup>
+                                <InputLeftElement
+                                pointerEvents="none"
+                                color="gray.300"
+                                fontSize="1.2em"
+                                children="$"
+                                />
+                                <Input type='text' placeholder="Price" />
+                                <Button ml={2}>Save</Button>
+                            </InputGroup>
+                        </Stack>
+                    </MenuList>
+                </Menu>
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        Size
+                    </MenuButton>
+                    <MenuList>
                         <MenuItem>Range</MenuItem>
+                    </MenuList>
+                </Menu>
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        Bedrooms
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem>More than 2</MenuItem>
+                        <MenuItem>More than 3</MenuItem>
+                        <MenuItem>More than 4</MenuItem>
                     </MenuList>
                 </Menu>
                 <Menu closeOnSelect={false}>
@@ -43,32 +86,37 @@ export default function Search() {
                         More Filters
                     </MenuButton>
                     <MenuList minWidth="240px">
-                        <MenuOptionGroup defaultValue="asc" title="Order" type="radio">
-                            <MenuItemOption value="asc">Ascending</MenuItemOption>
-                            <MenuItemOption value="desc">Descending</MenuItemOption>
+                        <MenuOptionGroup title="Amenities" type="checkbox">
+                            <MenuItemOption value="cooling">Cooling</MenuItemOption>
+                            <MenuItemOption value="heating">Heating</MenuItemOption>
+                            <MenuItemOption value="furnished">Furnished</MenuItemOption>
+                            <MenuItemOption value="solar_water">Solar Water</MenuItemOption>
+                            <MenuItemOption value="wheelchair">Wheelchair</MenuItemOption>
                         </MenuOptionGroup>
                         <MenuDivider />
-                        <MenuOptionGroup title="Appartment" type="checkbox">
-                            <MenuItemOption value="size">Size</MenuItemOption>
-                            <MenuItemOption value="bedrooms">Bedrooms</MenuItemOption>
-                            <MenuItemOption value="bathrooms">Bathrooms</MenuItemOption>
-                            <MenuItemOption value="homeType">Home Type</MenuItemOption>
+                        <MenuOptionGroup title="Facilities" type="checkbox">
+                            <MenuItemOption value="parking">Parking</MenuItemOption>
+                            <MenuItemOption value="elevator">Elevator</MenuItemOption>
+                            <MenuItemOption value="storage">Storage</MenuItemOption>
                         </MenuOptionGroup>
+                        <MenuDivider />
+                        <MenuOptionGroup title="Housing" type="checkbox">
+                            <MenuItemOption value="renovated">Renovated</MenuItemOption>
+                        </MenuOptionGroup>              
                     </MenuList>
                 </Menu>
-                <Text align="center">Sort by:</Text>
                 <Menu>
                     <MenuButton as={Button} bg="white" border="0.1rem #a4a4a4 solid" rightIcon={<ChevronDownIcon />}>
-                        Suggested
+                        Sort by
                     </MenuButton>
                     <MenuList>
                         <MenuItem>Price</MenuItem>
                         <MenuItem>Size</MenuItem>
-                        <MenuItem>Number of rooms</MenuItem>
                     </MenuList>
                 </Menu>
             </HStack>
-            <SimpleGrid minChildWidth="250px" spacing={4} p={4}>
+            <SimpleGrid minChildWidth="300px" spacing={4} p={4}>
+                <Card></Card>
                 <Skeleton height="320px" />
                 <Skeleton height="320px" />
                 <Skeleton height="320px" />
