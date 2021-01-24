@@ -1,5 +1,7 @@
 import { 
+    Box,
     Button, 
+    Flex, 
     FormControl, 
     HStack, 
     IconButton, 
@@ -49,7 +51,7 @@ export default function Search() {
                     </MenuButton>
                     <MenuList>
                         <Stack isInline align='baseline'>
-                            <Text fontSize='md'>Until</Text>
+                            <Text fontSize='md' ml="2">Until</Text>
                             <InputGroup>
                                 <InputLeftElement
                                 pointerEvents="none"
@@ -58,7 +60,7 @@ export default function Search() {
                                 children="$"
                                 />
                                 <Input type='text' placeholder="Price" />
-                                <Button ml={2}>Save</Button>
+                                <Button ml={2} mr="2">Save</Button>
                             </InputGroup>
                         </Stack>
                     </MenuList>
@@ -68,7 +70,10 @@ export default function Search() {
                         Size
                     </MenuButton>
                     <MenuList>
-                        <MenuItem>Range</MenuItem>
+                        <Stack isInline align='baseline'>
+                            <Input type="text" placeholder="Size" ml="2" />
+                            <Button ml={2} mr="2">Save</Button>
+                        </Stack>
                     </MenuList>
                 </Menu>
                 <Menu>
