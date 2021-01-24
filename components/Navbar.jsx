@@ -11,6 +11,7 @@ import {
   MenuList,
   MenuItem,
   useModal,
+  Modal,
 } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
 import Image from 'next/image';
@@ -60,7 +61,7 @@ export default function Navbar() {
           </Grid>
         </Container>
       </Box>
-      {modal && (
+      {Modal && (
         <CustomModal>
           <SignIn />
         </CustomModal>
