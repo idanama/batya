@@ -9,8 +9,6 @@ import {
   Text,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   RadioGroup,
   Radio,
   HStack,
@@ -31,9 +29,9 @@ export default function ListAHome() {
     beds: '',
     baths: '',
     year_built: '',
-    cooling: '',
-    heating: '',
-    furnished: '',
+    cooling: false,
+    heating: false,
+    furnished: false,
     details: '',
     arnona: '',
     parking_name: '', // ['Garage', 'Off street', null]
@@ -55,7 +53,11 @@ export default function ListAHome() {
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value || e.target.checked });
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleCheck = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.checked });
   };
 
   return (
@@ -150,17 +152,17 @@ export default function ListAHome() {
                     <Checkbox colorScheme="green">Parking</Checkbox>
                     <Checkbox
                       colorScheme="green"
-                      isChecked={form.elevator}
-                      onChange={handleChange}
                       name="elevator"
+                      isChecked={form.elevator}
+                      onChange={handleCheck}
                     >
                       Elevator
                     </Checkbox>
                     <Checkbox
-                      isChecked={form.storage}
-                      onChange={handleChange}
-                      name="storage"
                       colorScheme="green"
+                      name="storage"
+                      isChecked={form.storage}
+                      onChange={handleCheck}
                     >
                       Storage
                     </Checkbox>
@@ -179,11 +181,46 @@ export default function ListAHome() {
               <AccordionPanel pb={4}>
                 <FormControl>
                   <Stack spacing={10} direction="row">
-                    <Checkbox colorScheme="green">Cooling</Checkbox>
-                    <Checkbox colorScheme="green">Heating</Checkbox>
-                    <Checkbox colorScheme="green">Solar Water</Checkbox>
-                    <Checkbox colorScheme="green">Furnitures</Checkbox>
-                    <Checkbox colorScheme="green">Wheelchair</Checkbox>
+                    <Checkbox
+                      colorScheme="green"
+                      name="cooling"
+                      isChecked={form.cooling}
+                      onChange={handleCheck}
+                    >
+                      Cooling
+                    </Checkbox>
+                    <Checkbox
+                      colorScheme="green"
+                      name="heating"
+                      isChecked={form.heating}
+                      onChange={handleCheck}
+                    >
+                      Heating
+                    </Checkbox>
+                    <Checkbox
+                      colorScheme="green"
+                      name="solar_water"
+                      isChecked={form.solar_water}
+                      onChange={handleCheck}
+                    >
+                      Solar Water
+                    </Checkbox>
+                    <Checkbox
+                      colorScheme="green"
+                      name="furnished"
+                      isChecked={form.furnished}
+                      onChange={handleCheck}
+                    >
+                      Furnitures
+                    </Checkbox>
+                    <Checkbox
+                      colorScheme="green"
+                      name="wheelchair"
+                      isChecked={form.wheelchair}
+                      onChange={handleCheck}
+                    >
+                      Wheelchair
+                    </Checkbox>
                   </Stack>
                 </FormControl>
               </AccordionPanel>
@@ -212,6 +249,7 @@ export default function ListAHome() {
                       placeholder="Price"
                       name="price"
                       value={form.price}
+                      onChange={handleChange}
                     />
                   </InputGroup>
                 </FormControl>
