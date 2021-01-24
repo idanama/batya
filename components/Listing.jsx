@@ -10,6 +10,9 @@ import {
   Text,
   SimpleGrid,
   Box,
+  Heading,
+  Button,
+  Center,
 } from '@chakra-ui/react';
 import {
   FaBurn,
@@ -20,10 +23,19 @@ import {
   FaParking,
   FaUmbrellaBeach,
   FaTree,
-  FaDungeon,
   FaLongArrowAltUp,
   FaPaintRoller,
   FaSolarPanel,
+  FaWheelchair,
+  FaWarehouse,
+  FaBuilding,
+  FaHouzz,
+  FaHome,
+  FaRocket,
+  FaDog,
+  FaCat,
+  FaPaw,
+  FaBan,
 } from 'react-icons/fa';
 
 export default function Listing() {
@@ -38,7 +50,7 @@ export default function Listing() {
     cooling: true,
     heating: true,
     furnished: true,
-    details: 'wow so nice apartment',
+    details: 'A super nice apartment, in a great neighbourhood. Many places nearby. City view.',
     arnona: 800,
     user_id: 235,
     parking_name: 'garage', // ['garage','off_street']
@@ -72,7 +84,7 @@ export default function Listing() {
     // property_property_id: 'property5'
   };
 
-  const listingTable = [
+  const amneties = [
     {
       title: 'AC',
       name: 'cooling',
@@ -89,11 +101,6 @@ export default function Listing() {
       icon: <FaCouch />,
     },
     {
-      title: 'Parking',
-      name: 'parking_name',
-      icon: <FaParking />,
-    },
-    {
       title: 'View',
       name: 'view',
       icon: {
@@ -106,13 +113,9 @@ export default function Listing() {
     {
       title: 'Mamad',
       name: 'mamad',
-      icon: <FaDungeon />,
+      icon: <FaRocket />,
     },
-    {
-      title: 'Elevator',
-      name: 'elevator',
-      icon: <FaLongArrowAltUp />,
-    },
+
     {
       title: 'Renovated',
       name: 'renovated',
@@ -123,23 +126,71 @@ export default function Listing() {
       name: 'solar_water',
       icon: <FaSolarPanel />,
     },
-    // {
-    //   title: 'Accessible',
-    //   name:
-    // }
+    {
+      title: 'Parking',
+      name: 'parking_name',
+      icon: <FaParking />,
+    },
+    {
+      title: 'Elevator',
+      name: 'elevator',
+      icon: <FaLongArrowAltUp />,
+    },
+    {
+      title: 'Accessible',
+      name: 'wheelchair',
+      icon: <FaWheelchair />,
+    },
+    {
+      title: 'Storage',
+      name: 'storage',
+      icon: <FaWarehouse />,
+    },
+    {
+      title: {
+        apartment: 'Apartment',
+        condo_single_unit: 'Condo Single Unit',
+        house: 'House',
+        townhouse: 'Townhouse',
+      },
+      name: 'type_type',
+      icon: {
+        apartment: <FaBuilding />,
+        condo_single_unit: <FaBuilding />,
+        house: <FaHome />,
+        townhouse: <FaHouzz />,
+      },
+    },
+    {
+      title: {
+        'Allows large dog': 'Allows Dogs',
+        'Allows small dog': 'Allows Small Dogs',
+        'Allows cat': 'Allows Cats',
+        'Not allowed': 'No Pets',
+        Yes: 'All Pets Allowed',
+      },
+      icon: {
+        'Allows large dog': <FaDog />,
+        'Allows small dog': <FaDog />,
+        'Allows cat': <FaCat />,
+        'Not allowed': <FaBan />,
+        Yes: <FaPaw />,
+      },
+      name: 'pets',
+    },
   ];
 
   return (
-    <Container maxW="3xl" pt={3} pb={3}>
-      <Stack direction={['column', 'row']} spacing="2">
-        <Grid minH="300px" minW="50%" templateRows={['repeat(2,1fr)', 'repeat(3,1fr)']} gap={2}>
+    <Container maxW="6xl" pt={3} pb={3}>
+      <Grid templateColumns="3fr 2fr" gap={4}>
+        <Grid minH="300px" minW="50%" templateRows="repeat(6,1fr)" gap={4}>
           <Skeleton h="300px" />
           <Skeleton h="300px" />
           <Skeleton h="300px" />
           <Skeleton h="300px" />
           <Skeleton h="300px" />
         </Grid>
-        <Container>
+        <Box>
           <Stat>
             <StatNumber>{`${new Intl.NumberFormat().format(listing.price_month)} ₪`}</StatNumber>
             <StatLabel textTransform="capitalize" display="inline">
@@ -150,17 +201,33 @@ export default function Listing() {
               {listing.details}
             </Text>
             <StatHelpText>{`Available from ${listing.date_available}`}</StatHelpText>
-            <SimpleGrid spacing={2}>
-              {listingTable.map((item) => (
-                <Stack direction="row" alignItems="center" key={item.name} color="gray.600">
-                  <Box fontSize="xl">{item.icon[listing[item.name]] || item.icon}</Box>
-                  <Box>{item.title}</Box>
-                </Stack>
-              ))}
-            </SimpleGrid>
           </Stat>
-        </Container>
-      </Stack>
+          <Stack direction="column" shadow="base" p={6}>
+            <SimpleGrid spacing={4} columns={2}>
+              {amneties.map(
+                (item) =>
+                  listing[item.name] && (
+                    <Stack direction="row" alignItems="center" key={item.name} color="gray.600">
+                      <Box fontSize="xl">{item.icon[listing[item.name]] || item.icon}</Box>
+                      <Box>{item.title[listing[item.name]] || item.title}</Box>
+                    </Stack>
+                  )
+              )}
+            </SimpleGrid>
+            <SimpleGrid spacing={4} columns={2}>
+              {amneties.map(
+                (item) =>
+                  !listing[item.name] && (
+                    <Stack direction="row" alignItems="center" key={item.name} color="gray.600">
+                      <Box fontSize="xl">{item.icon[listing[item.name]] || item.icon}</Box>
+                      <Box>{item.title[listing[item.name]] || item.title}</Box>
+                    </Stack>
+                  )
+              )}
+            </SimpleGrid>
+          </Stack>
+        </Box>
+      </Grid>
     </Container>
   );
 }
