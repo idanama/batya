@@ -9,23 +9,16 @@ import {
   useDisclosure,
   Button,
 } from '@chakra-ui/react';
+import SignIn from './Signin';
 
 export default function CustomModal(props) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { isOpen, onOpen, onClose } = props;
   return (
     <>
-      <Button onClick={onOpen}>Trigger modal</Button>
-
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={onClose} isCentered size="md">
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
+        <ModalContent top>
           <ModalBody>{props.children}</ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
