@@ -10,27 +10,33 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  useModal,
   useDisclosure,
 } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession } from 'next-auth/client';
 
 import CustomModal from './Modal';
-import { LoginArea } from './Signin';
-import { SignUpArea } from './Signup';
-import Auth from './Auth';
+// import { LoginArea } from './Signin';
+// import { SignUpArea } from './Signup';
+// import Auth from './Auth';
+import auth from '../pages/auth';
+import Auth from '../pages/auth';
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [isSignin, setIsSignin] = useState(true);
   function modalHandler(signInstate) {
     setIsSignin(signInstate);
     onOpen();
   }
+
+  const [session, loading] = useSession();
+
   return (
-    <nav>
+    <nav style={{ zIndex: 50 }}>
       <Box shadow="lg" bg="white" width="full">
         <Container
           maxW="3xl"
@@ -41,6 +47,7 @@ export default function Navbar() {
           flexDir="row"
         >
           <Flex flexDir="row" alignItems="center">
+            {session && <span> Signed in as {session.user.email} </span>}
             <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
             <Text ml="2" fontSize="4xl">
               <span>Batya</span>
@@ -57,13 +64,16 @@ export default function Navbar() {
                 Rent
               </Button>
             </Link>
-            <Menu placement="bottom-end">
+            <Menu style={{ zIndex: '50' }} placement="bottom-end">
               <MenuButton as={Button} id="mnuUser">
                 <FaUser id="mnuUserIcon" />
               </MenuButton>
-              <MenuList>
+              <MenuList style={{ zIndex: '50' }}>
                 <MenuItem id="mnuLogin" onClick={() => modalHandler(true)}>
                   Login
+                </MenuItem>
+                <MenuItem>
+                  <Auth session={session} />
                 </MenuItem>
                 <MenuItem id="mnuSignup" onClick={() => modalHandler(false)}>
                   Register
@@ -74,7 +84,7 @@ export default function Navbar() {
         </Container>
       </Box>
       <CustomModal isOpen={isOpen} onClose={onClose}>
-        {isSignin ? (
+        {/* {isSignin ? (
           <Auth>
             <LoginArea />{' '}
           </Auth>
@@ -82,7 +92,7 @@ export default function Navbar() {
           <Auth>
             <SignUpArea />
           </Auth>
-        )}
+        )} */}
       </CustomModal>
     </nav>
   );

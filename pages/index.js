@@ -26,8 +26,8 @@ export default function Home() {
           w="full"
           flexDir="column"
           centerContent
-          zIndex="10"
           position="absolute"
+          zIndex="0"
           left="50%"
           transform="translateX(-50%)"
           color="white"
@@ -40,7 +40,13 @@ export default function Home() {
             <IconButton aria-label="find" icon={<FaSearch />} size="lg" ml="2" />
           </FormControl>
         </Container>
-        <Image src="/res/tel-aviv.jpg" layout="fill" objectFit="cover" className="filter-hero" />
+        <Image
+          style={{ zIndex: '-1' }}
+          src="/res/tel-aviv.jpg"
+          layout="fill"
+          objectFit="cover"
+          className="filter-hero"
+        />
       </Box>
       <Container maxW="3xl" w="full" pt={4}>
         <Text fontSize="xl">Latest listings</Text>
@@ -68,7 +74,6 @@ export default function Home() {
           </Button>
         </Grid>
       </Container>
-      <Auth />
     </div>
   );
 }
