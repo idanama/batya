@@ -21,7 +21,6 @@ import CustomModal from './Modal';
 // import { LoginArea } from './Signin';
 // import { SignUpArea } from './Signup';
 // import Auth from './Auth';
-import auth from '../pages/auth';
 import Auth from '../pages/auth';
 
 export default function Navbar() {
@@ -69,9 +68,6 @@ export default function Navbar() {
                 <FaUser id="mnuUserIcon" />
               </MenuButton>
               <MenuList style={{ zIndex: '50' }}>
-                <MenuItem id="mnuLogin" onClick={() => modalHandler(true)}>
-                  Login
-                </MenuItem>
                 <MenuItem>
                   <Auth session={session} />
                 </MenuItem>
