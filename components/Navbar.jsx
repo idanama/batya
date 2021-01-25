@@ -65,8 +65,10 @@ export default function Navbar() {
               </Button>
             </Link>
             <Menu style={{ zIndex: '50' }} placement="bottom-end">
-              <MenuButton as={Button} id="mnuUser">
-                <FaUser id="mnuUserIcon" />
+              <MenuButton as={Button} id="mnuUser" p="0">
+                <Container p="0" w="min-content">
+                  <FaUser id="mnuUserIcon" />
+                </Container>
               </MenuButton>
               <MenuList style={{ zIndex: '50' }}>
                 {session && <MenuItem>{`Signed in as ${session.user.email}`}</MenuItem>}
