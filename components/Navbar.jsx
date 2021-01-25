@@ -17,9 +17,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/client';
 
+import ThemeSelector from './ThemeSelector';
 import CustomModal from './Modal';
+import Logo from './Logo';
 // import { LoginArea } from './Signin';
-// import { SignUpArea } from './Signup';
+import SignUp from './Signup';
 // import Auth from './Auth';
 import Auth from '../pages/auth';
 
@@ -36,7 +38,7 @@ export default function Navbar() {
   useEffect(() => {}, [session]);
   return (
     <nav style={{ zIndex: 50 }}>
-      <Box shadow="lg" bg="white" width="full">
+      <Box shadow="lg" bg="bg" width="full">
         <Container
           maxW="6xl"
           w="full"
@@ -45,14 +47,13 @@ export default function Navbar() {
           justifyContent="space-between"
           flexDir="row"
         >
-          <Flex flexDir="row" alignItems="center">
-            {session && <span> Signed in as {session.user.email} </span>}
-            <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
-            <Text ml="2" fontSize="4xl">
-              <span>Batya</span>
-            </Text>
-          </Flex>
+          <Link href="/">
+            <a>
+              <Logo />
+            </a>
+          </Link>
           <Grid autoFlow="column" gap="4" position="relative">
+            <ThemeSelector />
             <Link href="/search" passHref>
               <Button id="mnuBuy" variant="ghost">
                 Buy
@@ -64,10 +65,13 @@ export default function Navbar() {
               </Button>
             </Link>
             <Menu style={{ zIndex: '50' }} placement="bottom-end">
-              <MenuButton as={Button} id="mnuUser">
-                <FaUser id="mnuUserIcon" />
+              <MenuButton as={Button} id="mnuUser" p="0">
+                <Container p="0" w="min-content">
+                  <FaUser id="mnuUserIcon" />
+                </Container>
               </MenuButton>
               <MenuList style={{ zIndex: '50' }}>
+                {session && <MenuItem>{`Signed in as ${session.user.email}`}</MenuItem>}
                 <MenuItem>
                   <Auth session={session} />
                 </MenuItem>
@@ -80,15 +84,7 @@ export default function Navbar() {
         </Container>
       </Box>
       <CustomModal isOpen={isOpen} onClose={onClose}>
-        {/* {isSignin ? (
-          <Auth>
-            <LoginArea />{' '}
-          </Auth>
-        ) : (
-          <Auth>
-            <SignUpArea />
-          </Auth>
-        )} */}
+        <SignUp />
       </CustomModal>
     </nav>
   );

@@ -13,7 +13,8 @@
     "rules": {
         "react/jsx-filename-extension": "off",
         "react/react-in-jsx-scope": "off",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "react/prop-types": "off"
     },
     "env": {
         "browser": true,
