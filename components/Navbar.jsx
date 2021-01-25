@@ -19,6 +19,7 @@ import { useSession } from 'next-auth/client';
 
 import ThemeSelector from './ThemeSelector';
 import CustomModal from './Modal';
+import Logo from './Logo';
 // import { LoginArea } from './Signin';
 import { SignUpArea } from './Signup';
 // import Auth from './Auth';
@@ -46,13 +47,11 @@ export default function Navbar() {
           justifyContent="space-between"
           flexDir="row"
         >
-          <Flex flexDir="row" alignItems="center">
-            {session && <span> Signed in as {session.user.email} </span>}
-            <Image src="/batya-logo.png" width="60" height="60" alt="Batya logo" />
-            <Text ml="2" fontSize="4xl">
-              <span>Batya</span>
-            </Text>
-          </Flex>
+          <Link href="/">
+            <a>
+              <Logo />
+            </a>
+          </Link>
           <Grid autoFlow="column" gap="4" position="relative">
             <ThemeSelector />
             <Link href="/search" passHref>
@@ -70,6 +69,7 @@ export default function Navbar() {
                 <FaUser id="mnuUserIcon" />
               </MenuButton>
               <MenuList style={{ zIndex: '50' }}>
+                {session && <MenuItem>{`Signed in as ${session.user.email}`}</MenuItem>}
                 <MenuItem>
                   <Auth session={session} />
                 </MenuItem>
