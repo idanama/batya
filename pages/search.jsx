@@ -5,8 +5,6 @@ import {
   HStack,
   IconButton,
   Input,
-  InputGroup,
-  InputLeftElement,
   Menu,
   MenuButton,
   MenuDivider,
@@ -16,12 +14,10 @@ import {
   MenuOptionGroup,
   SimpleGrid,
   Skeleton,
-  Stack,
-  Text,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { FaSearch } from 'react-icons/fa';
-import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import Card from '../components/Card';
 
 export default function Search() {
@@ -38,8 +34,8 @@ export default function Search() {
           </FormControl>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              Home Type
-          </MenuButton>
+              Housing Type
+            </MenuButton>
             <MenuList>
               <MenuItem>House</MenuItem>
               <MenuItem>Appartment</MenuItem>
@@ -48,7 +44,7 @@ export default function Search() {
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Price
-          </MenuButton>
+            </MenuButton>
             <MenuList>
               <MenuItem>Less than 200,000 $</MenuItem>
               <MenuItem>More than 200,000 $</MenuItem>
@@ -60,7 +56,7 @@ export default function Search() {
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Size
-          </MenuButton>
+            </MenuButton>
             <MenuList>
               <MenuItem>Less than 50 sqm</MenuItem>
               <MenuItem>More than 50 sqm</MenuItem>
@@ -71,7 +67,7 @@ export default function Search() {
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Bedrooms
-          </MenuButton>
+            </MenuButton>
             <MenuList>
               <MenuItem>More than 2</MenuItem>
               <MenuItem>More than 3</MenuItem>
@@ -81,7 +77,7 @@ export default function Search() {
           <Menu closeOnSelect={false}>
             <MenuButton as={Button} colorScheme="blue">
               More Filters
-          </MenuButton>
+            </MenuButton>
             <MenuList minWidth="240px">
               <MenuOptionGroup title="Amenities" type="checkbox">
                 <MenuItemOption value="cooling">Cooling</MenuItemOption>
@@ -112,7 +108,7 @@ export default function Search() {
               rightIcon={<ChevronDownIcon />}
             >
               Sort By
-          </MenuButton>
+            </MenuButton>
             <MenuList>
               <MenuItem>Price</MenuItem>
               <MenuItem>Size</MenuItem>

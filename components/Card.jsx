@@ -8,7 +8,7 @@ export default function Card() {
                 <Stack isInline align='baseline' justify='space-between'>
                     <Text as='h1' fontWeight='semibold' fontSize='md'>$2,140,366</Text>
                     <Badge variant='solid' bgColor='blue' rounded='full' px={2}>Est.Payment</Badge>
-                </Stack> 
+                </Stack>
                 <Text fontSize='md' py={2}>6 Beds | 2 Baths | 1,590 Sqft</Text>
                 <Text fontSize='sm'>381 Oak St. Orlando, CA 13010</Text>
             </Box>
