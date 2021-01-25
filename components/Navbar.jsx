@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -33,7 +33,7 @@ export default function Navbar() {
   }
 
   const [session, loading] = useSession();
-
+  useEffect(() => {}, [session]);
   return (
     <nav style={{ zIndex: 50 }}>
       <Box shadow="lg" bg="white" width="full">

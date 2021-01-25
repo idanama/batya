@@ -4,8 +4,9 @@ import { signIn, signOut, useSession } from 'next-auth/client';
 export default function Auth(props) {
   // const [session, loading] = useSession();
   const session = props.session;
-
+  console.log('here');
   if (!session) {
+    console.log('false');
     return (
       <>
         Not signed in <br />
