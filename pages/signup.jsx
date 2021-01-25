@@ -1,5 +1,5 @@
-import { SignUpArea } from '../components/Signup';
+import SignUp from '../components/Signup';
 
-export default function SignUp() {
-  return <SignUpArea />;
+export default function SignUpPage() {
+  return <SignUp logo={false} />;
 }

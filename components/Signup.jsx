@@ -1,44 +1,43 @@
 import {
   Box,
   Flex,
-  Heading,
   Text,
-  Link,
   FormControl,
   FormLabel,
   Input,
   Button,
+  VStack,
+  Center,
 } from '@chakra-ui/react';
+import Link from 'next/link';
+import Logo from './Logo';
 
 const VARIANT_COLOR = 'teal';
 
-export const SignUpArea = () => (
+const SignUp = ({ logo = true }) => (
   <Flex width="full" align="center" justifyContent="center">
-    <Box
-      borderWidth={1}
-      px={2}
-      width="full"
-      maxWidth="500px"
-      borderRadius={4}
-      textAlign="center"
-      boxShadow="lg"
-    >
+    <Box px={2} width="full" maxWidth="500px" textAlign="center">
       <Box p={2}>
-        <SignUpHeader />
+        <SignUpHeader logo={logo} />
         <SignUpForm />
       </Box>
     </Box>
   </Flex>
 );
 
-const SignUpHeader = () => (
-  <Box my={8} textAlign="left">
-    <Heading>Sign Up to Batya</Heading>
-    <Text>
-      Or
-      <Link color={`${VARIANT_COLOR}.500`}>Already have an account?</Link>
-    </Text>
-  </Box>
+const SignUpHeader = ({ logo }) => (
+  <>
+    <Center>{logo && <Logo />}</Center>
+    <VStack my={8} textAlign="left">
+      <Text fontSize="4xl">Sign up</Text>
+      <Text>Or</Text>
+      <Link href="/login">
+        <a>
+          <Text color={`${VARIANT_COLOR}.500`}>Already have an account?</Text>
+        </a>
+      </Link>
+    </VStack>
+  </>
 );
 
 const SignUpForm = () => (
@@ -57,25 +56,26 @@ const SignUpForm = () => (
         <Input required type="email" placeholder="Enter your Email Address" />
       </FormControl>
       <FormControl mt={4}>
-        <FormLabel>phone 1</FormLabel>
-        <Input required type="phone" placeholder="Enter your phone number 1" />
+        <FormLabel>Phone Number</FormLabel>
+        <Input required type="phone" placeholder="Enter your phone number" />
       </FormControl>
       <FormControl mt={4}>
-        <FormLabel>phone 2</FormLabel>
-        <Input type="phone" placeholder="Enter your phone number 2" />
+        <FormLabel>Secondary Phone Number</FormLabel>
+        <Input type="phone" placeholder="Enter your secondary phone number" />
       </FormControl>
       <FormControl mt={4}>
-        <FormLabel>password 1</FormLabel>
-        <Input required type="password" placeholder="Enter your phone password 1" />
+        <FormLabel>Password</FormLabel>
+        <Input required type="password" placeholder="Enter your password" />
       </FormControl>
       <FormControl mt={4}>
-        <FormLabel>password 2</FormLabel>
-        <Input required type="password" placeholder="Enter your phone password 2" />
+        <FormLabel>Confirm password</FormLabel>
+        <Input required type="password" placeholder="Confirm your password" />
       </FormControl>
 
-      <Button variant={VARIANT_COLOR} width="full" mt={4}>
+      <Button colorScheme={VARIANT_COLOR} width="full" mt={4}>
         Sign Up
       </Button>
     </form>
   </Box>
 );
+export default SignUp;

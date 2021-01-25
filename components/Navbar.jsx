@@ -21,7 +21,7 @@ import ThemeSelector from './ThemeSelector';
 import CustomModal from './Modal';
 import Logo from './Logo';
 // import { LoginArea } from './Signin';
-import { SignUpArea } from './Signup';
+import SignUp from './Signup';
 // import Auth from './Auth';
 import Auth from '../pages/auth';
 
@@ -82,7 +82,7 @@ export default function Navbar() {
         </Container>
       </Box>
       <CustomModal isOpen={isOpen} onClose={onClose}>
-        <SignUpArea />
+        <SignUp />
       </CustomModal>
     </nav>
   );
