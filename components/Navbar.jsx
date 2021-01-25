@@ -17,9 +17,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/client';
 
+import ThemeSelector from './ThemeSelector';
 import CustomModal from './Modal';
 // import { LoginArea } from './Signin';
-// import { SignUpArea } from './Signup';
+import { SignUpArea } from './Signup';
 // import Auth from './Auth';
 import Auth from '../pages/auth';
 
@@ -36,7 +37,7 @@ export default function Navbar() {
 
   return (
     <nav style={{ zIndex: 50 }}>
-      <Box shadow="lg" bg="white" width="full">
+      <Box shadow="lg" bg="bg" width="full">
         <Container
           maxW="6xl"
           w="full"
@@ -47,12 +48,13 @@ export default function Navbar() {
         >
           <Flex flexDir="row" alignItems="center">
             {session && <span> Signed in as {session.user.email} </span>}
-            <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
+            <Image src="/batya-logo.png" width="60" height="60" alt="Batya logo" />
             <Text ml="2" fontSize="4xl">
               <span>Batya</span>
             </Text>
           </Flex>
           <Grid autoFlow="column" gap="4" position="relative">
+            <ThemeSelector />
             <Link href="/search" passHref>
               <Button id="mnuBuy" variant="ghost">
                 Buy
@@ -80,15 +82,7 @@ export default function Navbar() {
         </Container>
       </Box>
       <CustomModal isOpen={isOpen} onClose={onClose}>
-        {/* {isSignin ? (
-          <Auth>
-            <LoginArea />{' '}
-          </Auth>
-        ) : (
-          <Auth>
-            <SignUpArea />
-          </Auth>
-        )} */}
+        <SignUpArea />
       </CustomModal>
     </nav>
   );

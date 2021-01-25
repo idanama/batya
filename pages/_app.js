@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types, react/jsx-props-no-spreading */
-import { Box, ChakraProvider, extendTheme, useColorMode } from '@chakra-ui/react';
+import {
+  Box, ChakraProvider, extendTheme, useColorMode,
+} from '@chakra-ui/react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import '../styles/globals.css';
@@ -10,13 +12,11 @@ function MyApp({ Component, pageProps }) {
     initialColorMode: 'light',
     useSystemColorMode: false,
   };
-
   const { colorMode } = useColorMode();
-
   return (
     <>
       <Head>Batya</Head>
-      <ChakraProvider theme={extendTheme({ config })} colorMode="light">
+      <ChakraProvider theme={extendTheme({ config })} colorMode={colorMode}>
         <Navbar />
         <Box minHeight="80vh">
           <Component {...pageProps} />

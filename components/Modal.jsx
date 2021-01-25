@@ -6,20 +6,16 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
-import SignIn from './Signin';
 
-export default function CustomModal(props) {
-  const { isOpen, onOpen, onClose } = props;
+export default function CustomModal({ isOpen, onOpen, onClose, children }) {
   return (
     <>
-      <ChakraProvider>
-        <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={onClose} isCentered size="md">
-          <ModalOverlay />
-          <ModalContent top>
-            <ModalBody>{props.children}</ModalBody>
-          </ModalContent>
-        </Modal>
-      </ChakraProvider>
+      <Modal closeOnOverlayClick isOpen={isOpen} onClose={onClose} isCentered size="md">
+        <ModalOverlay />
+        <ModalContent top>
+          <ModalBody>{children}</ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
