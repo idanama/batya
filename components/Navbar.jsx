@@ -54,6 +54,11 @@ export default function Navbar() {
           </Link>
           <Grid autoFlow="column" gap="4" position="relative">
             <ThemeSelector />
+            <Link href="/listAHome" passHref>
+              <Button id="mnuAdd" variant="ghost">
+                Add Property
+              </Button>
+            </Link>
             <Link href="/search" passHref>
               <Button id="mnuBuy" variant="ghost">
                 Buy
