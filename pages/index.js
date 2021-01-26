@@ -8,6 +8,7 @@ import {
   Skeleton,
   Grid,
   Button,
+  useColorMode,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -15,6 +16,8 @@ import { FaSearch } from 'react-icons/fa';
 import Auth from './auth';
 
 export default function Home() {
+  const { colorMode } = useColorMode();
+
   return (
     <div>
       <Head>
@@ -42,7 +45,7 @@ export default function Home() {
         </Container>
         <Image
           style={{ zIndex: '-1' }}
-          src="/res/tel-aviv.jpg"
+          src={colorMode === 'light' ? '/res/tel-aviv.jpg' : '/res/shai-pal-unsplash-night.jpg'}
           layout="fill"
           objectFit="cover"
           className="filter-hero"
