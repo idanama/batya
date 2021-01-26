@@ -17,52 +17,51 @@ import {
   Stack,
   InputLeftElement,
   InputGroup,
-  Button,
-  Select,
   Textarea,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useState } from 'react';
+import Card from '../components/Card';
 
 export default function ListAHome() {
   const [form, setForm] = useState({
-    listing_type: 'rental', // Done / TODO back end integration of listing type
-    sqm: '', // Done
-    beds: '', // Done
-    baths: '', // Done
-    year_built: '', // Done
-    cooling: false, // Done
-    heating: false, // Done
-    furnished: false, // Done
-    details: '', // Done
-    arnona: '', // Done
-    deposit: '', // Done
-    mamad: '', // Done
-    parking_name: 'garage', // ['Garage', 'Off street', null]
-    view: '', // Done
-    total_floors: '', // Done
-    apartment_floor: '', // Done
+    listing_type: '', // Back End
+    sqm: '',
+    beds: '',
+    baths: '',
+    year_built: '',
+    cooling: false,
+    heating: false,
+    furnished: false,
+    details: '',
+    arnona: '',
+    deposit: '',
+    mamad: false, // Back End
+    parking_name: '',
+    view: '',
+    total_floors: '',
+    apartment_floor: '',
     lot_size: '',
-    rooms: '', // Done
-    balconies: '', // Done
-    shelter: false, // Done
-    elevator: false, // Done
-    renovated: false, // Done
-    solar_water: false, // Done
-    wheelchair: false, // Done
-    storage: false, // Done
-    vaadbait: '', // Done
-    price: '', // Done
+    rooms: '',
+    balconies: '',
+    shelter: false,
+    elevator: false,
+    renovated: false,
+    solar_water: false,
+    wheelchair: false,
+    storage: false,
+    vaadbait: '',
+    price: '',
     price_month: '',
     pets: '',
     date_available: '',
-    type_type: 'house',
-    bedrooms_busy: '',
+    type_type: '',
+    rooms_busy: '',
     city: '',
     neighbourhood: '',
     street: '',
     home_number: '',
-    apartment_number: '',
+    appartment_number: '',
     entrance: '',
   });
 
@@ -171,7 +170,7 @@ export default function ListAHome() {
                         value={form.home_number}
                         onChange={handleChange}
                       />
-                      {form.type_type === 'apartment' ? (
+                      {form.type_type === 'appartment' ? (
                         <>
                           <FormLabel />
                           <Text fontSize="md" mr="2">
@@ -182,13 +181,13 @@ export default function ListAHome() {
                             maxW="5rem"
                             maxH="3rem"
                             mb="4"
-                            name="apartment_number"
-                            value={form.apartment_number}
+                            name="appartment_number"
+                            value={form.appartment_number}
                             onChange={handleChange}
                           />
                         </>
                       ) : (
-                          <span></span>
+                        <span />
                       )}
                       <Text fontSize="md">
                         Entrance
@@ -224,7 +223,7 @@ export default function ListAHome() {
                           <Radio onChange={handleChange} name="type_type" value="house">
                             House
                           </Radio>
-                          <Radio onChange={handleChange} name="type_type" value="apartment">
+                          <Radio onChange={handleChange} name="type_type" value="appartment">
                             Apartment
                           </Radio>
                           <Radio onChange={handleChange} name="type_type" value="roommates">
@@ -244,7 +243,25 @@ export default function ListAHome() {
                         value={form.sqm}
                         onChange={handleChange}
                       />
-                      <FormLabel />
+                      {form.type_type === 'house' ? (
+                        <>
+                          <FormLabel />
+                          <Text fontSize="md" mr="2">
+                            Lot Size
+                          </Text>
+                          <Input
+                            type="text"
+                            maxW="5rem"
+                            maxH="3rem"
+                            name="lot_size"
+                            value={form.lot_size}
+                            onChange={handleChange}
+                          />
+                          <FormLabel />
+                        </>
+                      ) : (
+                        <span />
+                      )}
                       <Text fontSize="md" mr="2">
                         Rooms
                       </Text>
@@ -268,7 +285,7 @@ export default function ListAHome() {
                         value={form.beds}
                         onChange={handleChange}
                       />
-                      {form.listing_type === "roommates" ? (
+                      {form.listing_type === 'roommates' ? (
                         <>
                           <FormLabel />
                           <Text fontSize="md" mr="2">
@@ -278,15 +295,15 @@ export default function ListAHome() {
                             type="text"
                             maxW="5rem"
                             maxH="3rem"
-                            name="bedrooms_busy"
-                            value={form.bedrooms_busy}
+                            name="rooms_busy"
+                            value={form.rooms_busy}
                             onChange={handleChange}
                           />
                           <FormLabel />
                         </>
                       ) : (
-                          <span></span>
-                        )}
+                        <FormLabel />
+                      )}
                       <Text fontSize="md" mr="2">
                         Baths
                       </Text>
@@ -311,18 +328,24 @@ export default function ListAHome() {
                         onChange={handleChange}
                       />
                       <FormLabel />
-                      <Text fontSize="md" mr="2">
-                        Apartment Floor
-                      </Text>
-                      <Input
-                        type="text"
-                        maxW="5rem"
-                        maxH="3rem"
-                        name="apartment_floor"
-                        value={form.apartment_floor}
-                        onChange={handleChange}
-                      />
-                      <FormLabel />
+                      {form.type_type === 'appartment' ? (
+                        <>
+                          <Text fontSize="md" mr="2">
+                            Apartment Floor
+                          </Text>
+                          <Input
+                            type="text"
+                            maxW="5rem"
+                            maxH="3rem"
+                            name="apartment_floor"
+                            value={form.apartment_floor}
+                            onChange={handleChange}
+                          />
+                          <FormLabel />
+                        </>
+                      ) : (
+                        ''
+                      )}
                       <Text fontSize="md" mr="2">
                         Balconies
                       </Text>
@@ -356,7 +379,34 @@ export default function ListAHome() {
                       >
                         Renovated
                       </Checkbox>
-                      <FormLabel />
+                      {form.listing_type === 'sale' ? (
+                        <FormLabel />
+                      ) : (
+                        <>
+                          <FormLabel />
+                          <RadioGroup value={form.pets}>
+                            <HStack spacing="20px">
+                              <Text fontSize="md">Pets</Text>
+                              <Radio onChange={handleChange} name="pets" value="allows_large_dog">
+                                Allows Dogs
+                              </Radio>
+                              <Radio onChange={handleChange} name="pets" value="allows_small-dog">
+                                Allows Small Dogs
+                              </Radio>
+                              <Radio onChange={handleChange} name="pets" value="allows-cat">
+                                Allows Pet
+                              </Radio>
+                              <Radio onChange={handleChange} name="pets" value="not_allowed">
+                                No Pets
+                              </Radio>
+                              <Radio onChange={handleChange} name="pets" value="allowed">
+                                All Pets Allowed
+                              </Radio>
+                            </HStack>
+                          </RadioGroup>
+                          <FormLabel />
+                        </>
+                      )}
                       <Text fontSize="md" mr="2">
                         View
                       </Text>
@@ -513,7 +563,7 @@ export default function ListAHome() {
               </AccordionButton>
               <AccordionPanel pb={4}>
                 <FormControl>
-                  {form.listing_type === "sale" ? (
+                  {form.listing_type === 'sale' ? (
                     <>
                       <InputGroup>
                         <InputLeftElement
@@ -534,26 +584,26 @@ export default function ListAHome() {
                       </InputGroup>
                     </>
                   ) : (
-                      <>
-                        <InputGroup>
-                          <InputLeftElement
-                            pointerEvents="none"
-                            color="gray.300"
-                            fontSize="1.2em"
-                            children="$"
-                          />
-                          <Input
-                            type="text"
-                            maxW="15rem"
-                            shadow="md"
-                            placeholder="Month Price "
-                            name="price_month"
-                            value={form.price_month}
-                            onChange={handleChange}
-                          />
-                        </InputGroup>
-                      </>
-                    )}
+                    <>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          color="gray.300"
+                          fontSize="1.2em"
+                          children="$"
+                        />
+                        <Input
+                          type="text"
+                          maxW="15rem"
+                          shadow="md"
+                          placeholder="Month Price "
+                          name="price_month"
+                          value={form.price_month}
+                          onChange={handleChange}
+                        />
+                      </InputGroup>
+                    </>
+                  )}
                   <FormLabel />
                   <InputGroup>
                     <InputLeftElement
@@ -590,30 +640,30 @@ export default function ListAHome() {
                       onChange={handleChange}
                     />
                   </InputGroup>
-                  {form.listing_type === "sale" ? (
-                    <span></span>
+                  {form.listing_type === 'sale' ? (
+                    <span />
                   ) : (
-                      <>
-                        <FormLabel />
-                        <InputGroup>
-                          <InputLeftElement
-                            pointerEvents="none"
-                            color="gray.300"
-                            fontSize="1.2em"
-                            children="$"
-                          />
-                          <Input
-                            type="text"
-                            maxW="15rem"
-                            shadow="md"
-                            placeholder="Deposit"
-                            name="deposit"
-                            value={form.deposit}
-                            onChange={handleChange}
-                          />
-                        </InputGroup>
-                      </>
-                    )}
+                    <>
+                      <FormLabel />
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          color="gray.300"
+                          fontSize="1.2em"
+                          children="$"
+                        />
+                        <Input
+                          type="text"
+                          maxW="15rem"
+                          shadow="md"
+                          placeholder="Deposit"
+                          name="deposit"
+                          value={form.deposit}
+                          onChange={handleChange}
+                        />
+                      </InputGroup>
+                    </>
+                  )}
                 </FormControl>
               </AccordionPanel>
             </AccordionItem>
@@ -627,15 +677,175 @@ export default function ListAHome() {
               </AccordionButton>
               <AccordionPanel pb={4}>
                 <FormControl>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <Stack isInline>
+                    <Stack maxW="300px" maxH="400px">
+                      <Card form={form} />
+                    </Stack>
+                    <Box direction="row" maxW="700px" rounded="20px" fontSize="md" boxShadow="lg" p={3}>
+                      <Stack isInline align="baseline" spacing={4} flexWrap="wrap">
+                        <Text ml={4} mb={2}>
+                          <u>Type:</u> <b>{form.listing_type}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>City:</u> <b>{form.city}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Neighbourhood:</u> <b>{form.neighbourhood}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Street:</u> <b>{form.street}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Home Number:</u> <b>{form.home_number}</b>
+                        </Text>
+                        {form.type_type === 'appartment' ? (
+                          <>
+                            <Text mb={2}>
+                              <u>Apartment Number:</u> <b>{form.appartment_number}</b>
+                            </Text>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                        <Text mb={2}>
+                          <u>Entrance:</u> <b>{form.entrance}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Housing Type:</u> <b>{form.type_type}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Size:</u> <b>{form.sqm}</b>
+                        </Text>
+                        {form.type_type === 'house' ? (
+                          <>
+                            <Text mb={2}>
+                              <u>Lot Size:</u> <b>{form.lot_size}</b>
+                            </Text>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                        <Text mb={2}>
+                          <u>Rooms:</u> <b>{form.rooms}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Beds:</u> <b>{form.beds}</b>
+                        </Text>
+                        {form.listing_type === 'roommates' ? (
+                          <>
+                            <Text mb={2}>
+                              <u>Beds Busy:</u> <b>{form.rooms_busy}</b>
+                            </Text>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                        <Text mb={2}>
+                          <u>Baths:</u> <b>{form.baths}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Total Floors:</u> <b>{form.total_floors}</b>
+                        </Text>
+                        {form.type_type === 'appartment' ? (
+                          <>
+                            <Text mb={2}>
+                              <u>Apartment Floor:</u> <b>{form.apartment_floor}</b>
+                            </Text>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                        <Text mb={2}>
+                          <u>Balconies:</u> <b>{form.balconies}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Year Built:</u> <b>{form.year_built}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Renovated:</u> <b>{form.renovated ? "Yes" : "No"}</b>
+                        </Text>
+                        {form.listing_type === 'sale' ? (
+                          ""
+                        ) : (
+                          <>
+                            <Text mb={2}>
+                              <u>Pets:</u> <b>{form.pets}</b>
+                            </Text>
+                          </>
+                        )}
+                        <Text mb={2}>
+                          <u>View:</u> <b>{form.view}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Other Details:</u> <b>{form.details}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Parking:</u> <b>{form.parking_name}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Elevator:</u> <b>{form.elevator ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Storage:</u> <b>{form.storage ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Shelter:</u> <b>{form.shelter ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Mamad:</u> <b>{form.mamad ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Cooling:</u> <b>{form.cooling ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Heating:</u> <b>{form.heating ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Solar Water:</u> <b>{form.solar_water ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Furnitures:</u> <b>{form.furnished ? "Yes" : "No"}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Wheelchair:</u> <b>{form.wheelchair ? "Yes" : "No"}</b>
+                        </Text>
+                        {form.listing_type === 'sale' ? (
+                          <>
+                            <Text mb={2}>
+                              <u>Price:</u> <b>{form.price}</b>
+                            </Text>
+                          </>
+                        ) : (
+                          <>
+                            <Text mb={2}>
+                              <u>Month Price:</u> <b>{form.price_month}</b>
+                            </Text>
+                          </>
+                        )}
+                        <Text mb={2}>
+                          <u>Property Tax:</u> <b>{form.arnona}</b>
+                        </Text>
+                        <Text mb={2}>
+                          <u>Vaad Bait:</u> <b>{form.vaadbait}</b>
+                        </Text>
+                        {form.listing_type === 'sale' ? (
+                          ""
+                        ) : (
+                          <>
+                            <Text mb={2}>
+                              <u>Deposit:</u> <b>{form.deposit}</b>
+                            </Text>
+                          </>
+                        )}
+                      </Stack>
+                    </Box>
+                  </Stack>
                 </FormControl>
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
         </form>
       </Container>
-    </div >
+    </div>
   );
 }
