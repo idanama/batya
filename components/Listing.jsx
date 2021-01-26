@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Container,
   Grid,
@@ -8,11 +9,13 @@ import {
   StatNumber,
   StatHelpText,
   Text,
+  GridItem,
   SimpleGrid,
   Box,
   Heading,
   Button,
   Center,
+  Img,
 } from '@chakra-ui/react';
 import {
   FaBurn,
@@ -82,7 +85,16 @@ export default function Listing() {
     // price: '2000000',
     // user_user_id: 'user3',
     // property_property_id: 'property5'
+    images: [
+      'https://picsum.photos/602/1000',
+      'https://picsum.photos/1000/601',
+      'https://picsum.photos/1000/602',
+      'https://picsum.photos/1000/605',
+      'https://picsum.photos/1000/606',
+    ],
   };
+
+  const [imageLoader, setImageLoader] = useState({});
 
   const amneties = [
     {
@@ -183,25 +195,59 @@ export default function Listing() {
   return (
     <Container maxW="6xl" pt={3} pb={3}>
       <Grid templateColumns="3fr 2fr" gap={4}>
-        <Grid minH="300px" minW="50%" templateRows="repeat(6,1fr)" gap={4}>
-          <Skeleton h="300px" />
-          <Skeleton h="300px" />
-          <Skeleton h="300px" />
-          <Skeleton h="300px" />
-          <Skeleton h="300px" />
+        <Grid
+          gridTemplateColumns="repeat(3,1fr)"
+          gridAutoRows="300px"
+          gridAutoFlow="row dense"
+          gap={4}
+        >
+          {listing.images.map((url, i) => {
+            let colSpan = 1;
+            let rowSpan = 1;
+            if (imageLoader[url] > 1 && i % 2 === 1) {
+              colSpan = 2;
+            }
+            if (i === 0 && imageLoader[url] > 1) {
+              colSpan = 3;
+            }
+            if (i === 0 && imageLoader[url] <= 1) {
+              rowSpan = 2;
+              colSpan = 2;
+            }
+            return (
+              <GridItem colSpan={colSpan} rowSpan={rowSpan} key={url}>
+                <Skeleton isLoaded={imageLoader[url]} minH="300px">
+                  <Img
+                    onLoad={(e) => {
+                      setImageLoader((imagesLoaded) => ({
+                        ...imagesLoaded,
+                        [url]: e.target.naturalWidth / e.target.naturalHeight,
+                      }));
+                    }}
+                    src={url}
+                    objectFit="cover"
+                    height="100%"
+                    width="100%"
+                  />
+                </Skeleton>
+              </GridItem>
+            );
+          })}
         </Grid>
         <Box>
-          <Stat>
-            <StatNumber>{`${new Intl.NumberFormat().format(listing.price_month)} ₪`}</StatNumber>
-            <StatLabel textTransform="capitalize" display="inline">
+          <Text fontSize="4xl" as="h2">
+            {`${new Intl.NumberFormat().format(listing.price_month)} ₪`}
+          </Text>
+          <Text fontSize="xl" as="h3">
+            <Text textTransform="capitalize" display="inline">
               {listing.type_type}
-            </StatLabel>
-            <StatLabel display="inline">{`, ${listing.sqm} m², ${listing.rooms} rooms.`}</StatLabel>
-            <Text mt="2" mb="2">
-              {listing.details}
             </Text>
-            <StatHelpText>{`Available from ${listing.date_available}`}</StatHelpText>
-          </Stat>
+            {`, ${listing.sqm} m², ${listing.rooms} rooms.`}
+          </Text>
+          {/* <Text>{`Available from ${listing.date_available}`}</Text> */}
+          <Text mt="2" mb="2">
+            {listing.details}
+          </Text>
           <Stack direction="column" shadow="base" p={6}>
             <SimpleGrid spacing={4} columns={2}>
               {amneties.map(
@@ -214,13 +260,15 @@ export default function Listing() {
                   )
               )}
             </SimpleGrid>
-            <SimpleGrid spacing={4} columns={2}>
+            <SimpleGrid pt={4} spacing={4} columns={2}>
               {amneties.map(
                 (item) =>
-                  !listing[item.name] && (
-                    <Stack direction="row" alignItems="center" key={item.name} color="gray.600">
+                  listing[item.name] === false && (
+                    <Stack direction="row" alignItems="center" key={item.name} color="gray.400">
                       <Box fontSize="xl">{item.icon[listing[item.name]] || item.icon}</Box>
-                      <Box>{item.title[listing[item.name]] || item.title}</Box>
+                      <Box>
+                        <Text as="s">{item.title[listing[item.name]] || item.title}</Text>
+                      </Box>
                     </Stack>
                   )
               )}

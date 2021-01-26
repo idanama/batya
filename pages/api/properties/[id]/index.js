@@ -1,4 +1,4 @@
-import { query } from '../../../lib/db';
+import { query } from '../../../../lib/db';
 
 // main function to handle different request methods for route properties/id.
 
@@ -30,7 +30,7 @@ export async function getPropertyById(req, res) {
       FROM property
       WHERE property_id = ?
     `,
-      req.query.id
+      +req.query.id
     );
     return res.json(results[0]);
   } catch (e) {
@@ -41,48 +41,21 @@ export async function getPropertyById(req, res) {
 export async function updateProperty(req, res) {
   try {
     const { property } = req.body;
+    console.log(Object.keys(property).join('=?, '));
     const { id } = req.query;
     if (!id || !property) {
       return res.status(400).json({ message: '`id`,`property` are required' });
     }
-    const array = [];
-    console.log(property);
-    Object.keys(property).forEach((element) => {
-      array.push(property[element]);
-    });
+
     const results = await query(
       `
       UPDATE property
       SET    
-      date_registered=?,
-      sqm=?,
-      beds=?,
-      baths=?,
-      year_built=?,
-      cooling=?,
-      heating=?,
-      furnished=?,
-      details=?,
-      arnona=?,
-      user_id=?,
-      parking_name=?,
-      view=?,
-      total_floors=?,
-      apartment_floor=?,
-      lot_size=?,
-      rooms=?,
-      balconies=?,
-      shelter=?,
-      elevator=?,
-      renovated=?,
-      solar_water=?,
-      wheelchair=?,
-      storage=?,
-      vaadbait=?,
-      type_type=?
+       ${Object.keys(property).join('=?, ')}
+       =?
       WHERE property_id = ?
       `,
-      array
+      [...Object.values(property), +id]
     );
     return res.json({ message: 'property updated successfully', property });
   } catch (e) {

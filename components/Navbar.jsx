@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -10,24 +10,35 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  useModal,
-  Modal,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession } from 'next-auth/client';
 
+import ThemeSelector from './ThemeSelector';
 import CustomModal from './Modal';
-import SignIn from './Signin';
+import Logo from './Logo';
+// import { LoginArea } from './Signin';
+import SignUp from './Signup';
+// import Auth from './Auth';
+import Auth from '../pages/auth';
 
 export default function Navbar() {
-  //create a function to show modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // pass show modal as prop to modal
+  const [isSignin, setIsSignin] = useState(true);
+  function modalHandler(signInstate) {
+    setIsSignin(signInstate);
+    onOpen();
+  }
 
+  const [session, loading] = useSession();
+  useEffect(() => {}, [session]);
   return (
-    <nav>
-      <Box shadow="lg" bg="white" width="full">
+    <nav style={{ zIndex: 50 }}>
+      <Box shadow="lg" bg="bg" width="full">
         <Container
           maxW="6xl"
           w="full"
@@ -36,36 +47,45 @@ export default function Navbar() {
           justifyContent="space-between"
           flexDir="row"
         >
-          <Flex flexDir="row" alignItems="center">
-            <Image src="/birds-nest-logo.jpg" width="60" height="60" alt="Batya logo" />
-            <Text ml="2" fontSize="4xl">
-              <h2>Batya</h2>
-            </Text>
-          </Flex>
+          <Link href="/">
+            <a>
+              <Logo />
+            </a>
+          </Link>
           <Grid autoFlow="column" gap="4" position="relative">
+            <ThemeSelector />
             <Link href="/search" passHref>
-              <Button variant="ghost">Buy</Button>
+              <Button id="mnuBuy" variant="ghost">
+                Buy
+              </Button>
             </Link>
             <Link href="/search" passHref>
-              <Button variant="ghost">Rent</Button>
+              <Button id="mnuRent" variant="ghost">
+                Rent
+              </Button>
             </Link>
-            <Menu placement="bottom-end">
-              <MenuButton as={Button}>
-                <FaUser />
+            <Menu style={{ zIndex: '50' }} placement="bottom-end">
+              <MenuButton as={Button} id="mnuUser" p="0">
+                <Container p="0" w="min-content">
+                  <FaUser id="mnuUserIcon" />
+                </Container>
               </MenuButton>
-              <MenuList>
-                <MenuItem onClick={() => setModal(true)}>Login</MenuItem>
-                <MenuItem>Register</MenuItem>
+              <MenuList style={{ zIndex: '50' }}>
+                {session && <MenuItem>{`Signed in as ${session.user.email}`}</MenuItem>}
+                <MenuItem>
+                  <Auth session={session} />
+                </MenuItem>
+                <MenuItem id="mnuSignup" onClick={() => modalHandler(false)}>
+                  Register
+                </MenuItem>
               </MenuList>
             </Menu>
           </Grid>
         </Container>
       </Box>
-      {Modal && (
-        <CustomModal>
-          <SignIn />
-        </CustomModal>
-      )}
+      <CustomModal isOpen={isOpen} onClose={onClose}>
+        <SignUp />
+      </CustomModal>
     </nav>
   );
 }

@@ -20,47 +20,28 @@ export default function handler(req, res) {
 
 export async function addProperty(req, res) {
   const { property } = req.body;
+  console.log(Object.keys(property).join(', '));
+  console.log(Object.values(property));
+  console.log(
+    Object.keys(property)
+      .map(() => '? ')
+      .join(',')
+  );
 
   try {
     if (!property) {
       return res.status(400).json({ message: 'must send a property' });
     }
-    const array = [];
-    Object.keys(property).forEach((element) => {
-      array.push(property[element]);
-    });
     const results = await query(
       `
       INSERT INTO property (
-      date_registered,
-      sqm,
-      beds,
-      baths,
-      year_built,
-      cooling,
-      heating,
-      furnished,
-      details,
-      arnona,
-      user_id,
-      parking_name,
-      view,
-      total_floors,
-      apartment_floor,
-      lot_size,
-      rooms,
-      balconies,
-      shelter,
-      elevator,
-      renovated,
-      solar_water,
-      wheelchair,
-      storage,
-      vaadbait,
-      type_type)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        ${Object.keys(property).join(', ')}
+     )
+      VALUES (${Object.keys(property)
+        .map(() => '? ')
+        .join(',')})
       `,
-      array
+      Object.values(property)
     );
 
     property.id = results.insertId;
