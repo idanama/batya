@@ -16,7 +16,7 @@ const VARIANT_COLOR = 'teal';
 
 const SignUp = ({ logo = true }) => (
   <Flex width="full" align="center" justifyContent="center">
-    <Box px={2} width="full" maxWidth="500px" textAlign="center">
+    <Box px={2} width="full" maxWidth="500px">
       <Box p={2}>
         <SignUpHeader logo={logo} />
         <SignUpForm />
@@ -28,9 +28,8 @@ const SignUp = ({ logo = true }) => (
 const SignUpHeader = ({ logo }) => (
   <>
     <Center>{logo && <Logo />}</Center>
-    <VStack my={8} textAlign="left">
+    <VStack my={8} textAlign="left" alignItems={logo ? 'flex-start' : 'center'}>
       <Text fontSize="4xl">Sign up</Text>
-      <Text>Or</Text>
       <Link href="/login">
         <a>
           <Text color={`${VARIANT_COLOR}.500`}>Already have an account?</Text>
