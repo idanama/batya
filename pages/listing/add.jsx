@@ -16,6 +16,7 @@ import {
   Checkbox,
   Button,
   Grid,
+  SimpleGrid,
   Flex,
   Stack,
   InputLeftElement,
@@ -23,6 +24,7 @@ import {
   InputGroup,
   Textarea,
   Spacer,
+  VStack,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useState } from 'react';
@@ -129,9 +131,9 @@ export default function ListAHome() {
   };
 
   const checks = [
-    !!form.listing_type,
+    !!form.listing_type && !!form.type_type,
     !!form.city && !!form.street && !!form.home_number,
-    !!form.type_type && !!form.sqm,
+    !!form.sqm,
     !!form.parking_name,
     undefined,
     !!form.price || !!form.price_month,
@@ -144,8 +146,8 @@ export default function ListAHome() {
       </Head>
       <Container maxW="6xl" pt={3} pb={3}>
         <Box shadow="2xl">
-          <Text ml="9" mb="9" mt="9" fontSize="3xl">
-            <h2>List a home</h2>
+          <Text as="h2" p="9" fontSize="3xl">
+            List a home
           </Text>
 
           <form type="submit">
@@ -167,6 +169,22 @@ export default function ListAHome() {
                         </Radio>
                         <Radio onChange={handleChange} name="listing_type" value="roommates">
                           Roommates
+                        </Radio>
+                      </HStack>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>Housing Type</FormLabel>
+                    <RadioGroup value={form.type_type} isRequired>
+                      <HStack spacing="24px">
+                        <Radio onChange={handleChange} name="type_type" value="house">
+                          House
+                        </Radio>
+                        <Radio onChange={handleChange} name="type_type" value="appartment">
+                          Apartment
+                        </Radio>
+                        <Radio onChange={handleChange} name="type_type" value="roommates">
+                          Single Condo Unit
                         </Radio>
                       </HStack>
                     </RadioGroup>
@@ -238,172 +256,143 @@ export default function ListAHome() {
 
               <AccordionItem>
                 <AccordionTitle position={2} ok={checks[2]} changeStep={changeStep}>
-                  Housing
+                  House Details
                 </AccordionTitle>
 
                 <AccordionPanel pb={4}>
-                  <FormControl>
-                    <InputGroup>
-                      <Stack align="baseline">
-                        <FormControl isRequired>
-                          <FormLabel>Housing Type</FormLabel>
-                          <RadioGroup value={form.type_type} isRequired>
-                            <HStack spacing="24px">
-                              <Radio onChange={handleChange} name="type_type" value="house">
-                                House
-                              </Radio>
-                              <Radio onChange={handleChange} name="type_type" value="appartment">
-                                Apartment
-                              </Radio>
-                              <Radio onChange={handleChange} name="type_type" value="roommates">
-                                Single Condo Unit
-                              </Radio>
-                            </HStack>
-                          </RadioGroup>
-                        </FormControl>
+                  <SimpleGrid columns={2} spacing={6}>
+                    <FormInput
+                      title="Size"
+                      name="sqm"
+                      handleChange={handleChange}
+                      value={form.sqm}
+                      type="number"
+                    />
+                    {form.type_type === 'house' && (
+                      <>
                         <FormInput
-                          title="Size"
-                          name="sqm"
+                          title="Lot Size"
+                          name="lot_size"
                           handleChange={handleChange}
-                          value={form.sqm}
+                          value={form.lot_size}
                           type="number"
                         />
-                        {form.type_type === 'house' && (
-                          <>
-                            <FormInput
-                              title="Lot Size"
-                              name="lot_size"
-                              handleChange={handleChange}
-                              value={form.lot_size}
-                              type="number"
-                            />
-                          </>
-                        )}
+                      </>
+                    )}
+                    <FormInput
+                      title="Rooms"
+                      name="rooms"
+                      handleChange={handleChange}
+                      value={form.rooms}
+                      type="number"
+                    />
+                    <FormInput
+                      title="Total Bed Rooms"
+                      name="beds"
+                      handleChange={handleChange}
+                      value={form.beds}
+                      type="number"
+                    />
+                    {form.listing_type === 'roommates' && (
+                      <>
                         <FormInput
-                          title="Rooms"
-                          name="rooms"
-                          handleChange={handleChange}
-                          value={form.rooms}
-                          type="number"
-                        />
-                        <FormInput
-                          title="Total Bed Rooms"
+                          title="Occupied Bed Rooms"
                           name="beds"
-                          handleChange={handleChange}
-                          value={form.beds}
+                          value={form.rooms_busy}
                           type="number"
+                          handleChange={handleChange}
                         />
-                        {form.listing_type === 'roommates' && (
-                          <>
-                            <FormInput
-                              title="Occupied Bed Rooms"
-                              name="beds"
-                              value={form.rooms_busy}
-                              type="number"
-                              handleChange={handleChange}
-                            />
-                          </>
-                        )}
+                      </>
+                    )}
+                    <FormInput
+                      title="Bath Rooms"
+                      name="baths"
+                      value={form.baths}
+                      type="number"
+                      handleChange={handleChange}
+                    />
+                    {form.type_type === 'appartment' && (
+                      <>
                         <FormInput
-                          title="Bath Rooms"
-                          name="baths"
-                          value={form.baths}
+                          title="Apartment Floor"
+                          name="apartment_floor"
+                          value={form.apartment_floor}
                           type="number"
                           handleChange={handleChange}
                         />
-                        {form.type_type === 'appartment' && (
-                          <>
-                            <FormInput
-                              title="Apartment Floor"
-                              name="apartment_floor"
-                              value={form.apartment_floor}
-                              type="number"
-                              handleChange={handleChange}
-                            />
-                          </>
-                        )}
-                        <FormInput
-                          title="Total Floors"
-                          name="total_floors"
-                          value={form.total_floors}
-                          type="number"
-                          handleChange={handleChange}
-                        />
-                        <FormInput
-                          title="Balconies"
-                          name="balconies"
-                          value={form.balconies}
-                          type="number"
-                          handleChange={handleChange}
-                        />
-                        <FormInput
-                          title="Year Built"
-                          name="year_built"
-                          value={form.year_built}
-                          type="number"
-                          handleChange={handleChange}
-                        />
-                        <Checkbox
-                          colorScheme="green"
-                          ml="2"
-                          name="renovated"
-                          isChecked={form.renovated}
-                          onChange={handleCheck}
-                        >
-                          Renovated
-                        </Checkbox>
-                        {form.listing_type === 'sale' ? (
-                          <FormLabel />
-                        ) : (
-                          <>
-                            <FormLabel />
-                            <RadioGroup value={form.pets}>
-                              <HStack spacing="20px">
-                                <Text fontSize="md">Pets</Text>
-                                <Radio onChange={handleChange} name="pets" value="allows_large_dog">
-                                  Allows Dogs
-                                </Radio>
-                                <Radio onChange={handleChange} name="pets" value="allows_small-dog">
-                                  Allows Small Dogs
-                                </Radio>
-                                <Radio onChange={handleChange} name="pets" value="allows-cat">
-                                  Allows Pet
-                                </Radio>
-                                <Radio onChange={handleChange} name="pets" value="not_allowed">
-                                  No Pets
-                                </Radio>
-                                <Radio onChange={handleChange} name="pets" value="allowed">
-                                  All Pets Allowed
-                                </Radio>
-                              </HStack>
-                            </RadioGroup>
-                            <FormLabel />
-                          </>
-                        )}
-                        <Text fontSize="md" mr="2">
-                          View
-                        </Text>
-                        <Input
-                          type="text"
-                          maxH="3rem"
-                          name="view"
-                          value={form.view}
-                          onChange={handleChange}
-                        />
-                        <FormLabel />
-                        <Text fontSize="md" mr="2">
-                          Other Details
-                        </Text>
-                        <Textarea
-                          type="text"
-                          name="details"
-                          minW="40rem"
-                          value={form.details}
-                          onChange={handleChange}
-                        />
-                      </Stack>
-                    </InputGroup>
-                  </FormControl>
+                      </>
+                    )}
+                    <FormInput
+                      title="Total Floors"
+                      name="total_floors"
+                      value={form.total_floors}
+                      type="number"
+                      handleChange={handleChange}
+                    />
+                    <FormInput
+                      title="Balconies"
+                      name="balconies"
+                      value={form.balconies}
+                      type="number"
+                      handleChange={handleChange}
+                    />
+                    <FormInput
+                      title="Year Built"
+                      name="year_built"
+                      value={form.year_built}
+                      type="number"
+                      handleChange={handleChange}
+                    />
+                    <FormInput
+                      title="View"
+                      name="view"
+                      value={form.view}
+                      type="text"
+                      handleChange={handleChange}
+                    />
+                    <FormInput
+                      title="Other Details"
+                      name="view"
+                      value={form.details}
+                      type="text"
+                      handleChange={handleChange}
+                    />
+                  </SimpleGrid>
+                  <VStack spacing={4} w="full" alignItems="flex-start">
+                    {form.listing_type !== 'sale' && (
+                      <>
+                        <RadioGroup value={form.pets}>
+                          <Text fontSize="md">Pets</Text>
+                          <SimpleGrid columns={2} spacing="2">
+                            <Radio onChange={handleChange} name="pets" value="allowed">
+                              All Pets Allowed
+                            </Radio>
+                            <Radio onChange={handleChange} name="pets" value="allows_large_dog">
+                              Allows Dogs
+                            </Radio>
+                            <Radio onChange={handleChange} name="pets" value="allows_small-dog">
+                              Allows Small Dogs
+                            </Radio>
+                            <Radio onChange={handleChange} name="pets" value="allows-cat">
+                              Allows Cats
+                            </Radio>
+                            <Radio onChange={handleChange} name="pets" value="not_allowed">
+                              No Pets Allowed
+                            </Radio>
+                          </SimpleGrid>
+                        </RadioGroup>
+                      </>
+                    )}
+                    <Checkbox
+                      colorScheme="green"
+                      ml="2"
+                      name="renovated"
+                      isChecked={form.renovated}
+                      onChange={handleCheck}
+                    >
+                      Renovated
+                    </Checkbox>
+                  </VStack>
                   <AccordionButtons position={2} changeStep={changeStep} ok={checks[2]} />
                 </AccordionPanel>
               </AccordionItem>
@@ -557,8 +546,6 @@ export default function ListAHome() {
                           </InputLeftElement>
                           <Input
                             type="text"
-                            maxW="15rem"
-                            shadow="md"
                             placeholder="Month Price "
                             name="price_month"
                             value={form.price_month}
@@ -574,8 +561,6 @@ export default function ListAHome() {
                       </InputLeftElement>
                       <Input
                         type="text"
-                        maxW="15rem"
-                        shadow="md"
                         placeholder="Property Tax"
                         name="arnona"
                         value={form.arnona}
@@ -584,22 +569,22 @@ export default function ListAHome() {
                     </InputGroup>
                     <FormLabel />
                     <InputGroup>
-                      <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
-                        ₪
-                      </InputLeftElement>
+                      <InputLeftElement
+                        pointerEvents="none"
+                        color="gray.300"
+                        fontSize="1.2em"
+                        children="₪"
+                      />
                       <Input
                         type="text"
-                        maxW="15rem"
-                        shadow="md"
                         placeholder="Vaad Bait"
                         name="vaadbait"
                         value={form.vaadbait}
                         onChange={handleChange}
                       />
                     </InputGroup>
-                    {form.listing_type === 'sale' ? (
-                      <span />
-                    ) : (
+
+                    {form.listing_type !== 'sale' && (
                       <>
                         <FormLabel />
                         <InputGroup>
@@ -611,8 +596,6 @@ export default function ListAHome() {
                           />
                           <Input
                             type="text"
-                            maxW="15rem"
-                            shadow="md"
                             placeholder="Deposit"
                             name="deposit"
                             value={form.deposit}
