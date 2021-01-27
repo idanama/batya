@@ -28,35 +28,38 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import Card from '../../components/Card';
+import { Dropzone } from '../../components/dropzone';
 
-function AccordionButtons({position,changeStep, ok}) {
-    return (
-      <Flex mt={2}>
-        <Button onClick={() => position > 0 && changeStep(position-1)} disabled={position === 0}>Previous</Button>
-        <Spacer/>
-        <Button colorScheme="teal" onClick={() => changeStep(position+1)} disabled={!ok}>Next</Button>
-      </Flex>
-    )
-  }
+function AccordionButtons({ position, changeStep, ok }) {
+  return (
+    <Flex mt={2}>
+      <Button onClick={() => position > 0 && changeStep(position - 1)} disabled={position === 0}>
+        Previous
+      </Button>
+      <Spacer />
+      <Button colorScheme="teal" onClick={() => changeStep(position + 1)} disabled={!ok}>
+        Next
+      </Button>
+    </Flex>
+  );
+}
 
-  function AccordionTitle({ children, position, ok, changeStep }) {
-    const handleClick = () => {
-      changeStep(position)
-    }
-    return (
-      <AccordionButton onClick={handleClick}>
-        <Text fontSize="lg" width="full" textAlign="left">
-          <h4>{children}</h4>
-        </Text>
-        <HStack spacing={2}>
-          {ok && (
-            <FaCheck color="#38A169" />
-          )}
-          <AccordionIcon />
-        </HStack>
-      </AccordionButton>
-    );
-  }
+function AccordionTitle({ children, position, ok, changeStep }) {
+  const handleClick = () => {
+    changeStep(position);
+  };
+  return (
+    <AccordionButton onClick={handleClick}>
+      <Text fontSize="lg" width="full" textAlign="left">
+        <h4>{children}</h4>
+      </Text>
+      <HStack spacing={2}>
+        {ok && <FaCheck color="#38A169" />}
+        <AccordionIcon />
+      </HStack>
+    </AccordionButton>
+  );
+}
 
 export default function ListAHome() {
   const [step, setStep] = useState(0);
@@ -101,14 +104,8 @@ export default function ListAHome() {
     entrance: '',
   });
 
-  
-
-  
-
-  
-
   const handleChange = (e) => {
-    setForm((curForm) =>( { ...curForm, [e.target.name]: e.target.value }));
+    setForm((curForm) => ({ ...curForm, [e.target.name]: e.target.value }));
   };
 
   const handleCheck = (e) => {
@@ -116,13 +113,13 @@ export default function ListAHome() {
   };
 
   const checks = [
-    (!!form.listing_type),
-    (!!form.city && !!form.street && !!form.home_number),
-    (!!form.type_type && !!form.sqm),
-    (!!form.parking_name),
+    !!form.listing_type,
+    !!form.city && !!form.street && !!form.home_number,
+    !!form.type_type && !!form.sqm,
+    !!form.parking_name,
     undefined,
-    (!!form.price || !!form.price_month)
-  ]
+    !!form.price || !!form.price_month,
+  ];
 
   return (
     <div>
@@ -138,11 +135,13 @@ export default function ListAHome() {
           <form type="submit">
             <Accordion allowToggle index={step}>
               <AccordionItem number={0}>
-                <AccordionTitle position={0} ok={checks[0]} changeStep={setStep}>Type</AccordionTitle>
+                <AccordionTitle position={0} ok={checks[0]} changeStep={setStep}>
+                  Type
+                </AccordionTitle>
                 <AccordionPanel pb={4}>
                   <FormControl as="fieldset">
                     <FormLabel />
-                    <RadioGroup isRequired value={form.listing_type} name="listing_type" >
+                    <RadioGroup isRequired value={form.listing_type} name="listing_type">
                       <HStack spacing="24px">
                         <Radio onChange={handleChange} name="listing_type" value="rental">
                           Rental
@@ -156,12 +155,14 @@ export default function ListAHome() {
                       </HStack>
                     </RadioGroup>
                   </FormControl>
-                  <AccordionButtons position={0} changeStep={setStep} ok={checks[0]}/>
+                  <AccordionButtons position={0} changeStep={setStep} ok={checks[0]} />
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem number={1}>
-                <AccordionTitle position={1} ok={checks[1]}  changeStep={setStep}>Address</AccordionTitle>
+                <AccordionTitle position={1} ok={checks[1]} changeStep={setStep}>
+                  Address
+                </AccordionTitle>
                 <AccordionPanel pb={4}>
                   <FormControl>
                     <InputGroup>
@@ -247,12 +248,14 @@ export default function ListAHome() {
                       </Stack>
                     </InputGroup>
                   </FormControl>
-                  <AccordionButtons position={1}  changeStep={setStep} ok={checks[1]}/>
+                  <AccordionButtons position={1} changeStep={setStep} ok={checks[1]} />
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem>
-                <AccordionTitle  position={2}  ok={checks[2]}  changeStep={setStep}>Housing</AccordionTitle>
+                <AccordionTitle position={2} ok={checks[2]} changeStep={setStep}>
+                  Housing
+                </AccordionTitle>
 
                 <AccordionPanel pb={4}>
                   <FormControl>
@@ -474,12 +477,14 @@ export default function ListAHome() {
                       </Stack>
                     </InputGroup>
                   </FormControl>
-                  <AccordionButtons position={2}  changeStep={setStep}  ok={checks[2]} />
+                  <AccordionButtons position={2} changeStep={setStep} ok={checks[2]} />
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem>
-                <AccordionTitle  position={3}  ok={checks[3]}  changeStep={setStep}>Facilities</AccordionTitle>
+                <AccordionTitle position={3} ok={checks[3]} changeStep={setStep}>
+                  Facilities
+                </AccordionTitle>
 
                 <AccordionPanel pb={4}>
                   <FormControl>
@@ -536,12 +541,14 @@ export default function ListAHome() {
                       </Checkbox>
                     </Stack>
                   </FormControl>
-                  <AccordionButtons position={3}  changeStep={setStep}  ok={checks[3]}/>
+                  <AccordionButtons position={3} changeStep={setStep} ok={checks[3]} />
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem>
-                <AccordionTitle  position={4}  ok={checks[4]}  changeStep={setStep}>Amenities</AccordionTitle>
+                <AccordionTitle position={4} ok={checks[4]} changeStep={setStep}>
+                  Amenities
+                </AccordionTitle>
                 <AccordionPanel pb={4}>
                   <FormControl>
                     <Stack spacing={10} direction="row">
@@ -587,12 +594,14 @@ export default function ListAHome() {
                       </Checkbox>
                     </Stack>
                   </FormControl>
-                  <AccordionButtons position={4}  changeStep={setStep}  ok={checks[4]}/>
+                  <AccordionButtons position={4} changeStep={setStep} ok={checks[4]} />
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem>
-                <AccordionTitle  position={5}  ok={checks[5]}  changeStep={setStep}>Price</AccordionTitle>
+                <AccordionTitle position={5} ok={checks[5]} changeStep={setStep}>
+                  Price
+                </AccordionTitle>
 
                 <AccordionPanel pb={4}>
                   <FormControl>
@@ -700,20 +709,23 @@ export default function ListAHome() {
                       </>
                     )}
                   </FormControl>
-                  <AccordionButtons position={5}  changeStep={setStep}  ok={checks[5]}/>
+                  <AccordionButtons position={5} changeStep={setStep} ok={checks[5]} />
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem>
-                <AccordionTitle  position={6}  ok={checks[6]}  changeStep={setStep}>Photos</AccordionTitle>
-                <AccordionPanel pb={4}>Photos here
-                
-                                  <AccordionButtons position={6}  changeStep={setStep}  ok={checks[6]}/>
+                <AccordionTitle position={6} ok={checks[6]} changeStep={setStep}>
+                  Photos
+                </AccordionTitle>
+                <AccordionPanel pb={4}>
+                  <Dropzone />
+                  <AccordionButtons position={6} changeStep={setStep} ok={checks[6]} />
                 </AccordionPanel>
-
               </AccordionItem>
               <AccordionItem>
-                <AccordionTitle  position={7}  ok={checks[7]}  changeStep={setStep}>Publish</AccordionTitle>
+                <AccordionTitle position={7} ok={checks[7]} changeStep={setStep}>
+                  Publish
+                </AccordionTitle>
                 <AccordionPanel pb={4}>
                   <FormControl>
                     <Stack isInline>
@@ -887,7 +899,7 @@ export default function ListAHome() {
                       </Box>
                     </Stack>
                   </FormControl>
-                  <AccordionButtons position={7}  changeStep={setStep}  ok={checks[7]}/>
+                  <AccordionButtons position={7} changeStep={setStep} ok={checks[7]} />
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
