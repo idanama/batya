@@ -281,124 +281,68 @@ export default function ListAHome() {
                         )}
                         <FormInput
                           title="Rooms"
-                          name="lot_size"
+                          name="rooms"
                           handleChange={handleChange}
-                          value={form.lot_size}
+                          value={form.rooms}
                           type="number"
                         />
-                        <FormControl>
-                          <FormLabel>Rooms</FormLabel>
-                          <Input
-                            type="text"
-                            maxW="5rem"
-                            maxH="3rem"
-                            name="rooms"
-                            value={form.rooms}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel>Beds</FormLabel>
-                          <Input
-                            type="text"
-                            maxW="5rem"
-                            maxH="3rem"
-                            name="beds"
-                            value={form.beds}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
+                        <FormInput
+                          title="Total Bed Rooms"
+                          name="beds"
+                          handleChange={handleChange}
+                          value={form.beds}
+                          type="number"
+                        />
                         {form.listing_type === 'roommates' && (
                           <>
-                            <FormControl>
-                              <FormLabel>Beds Busy</FormLabel>
-                              <Input
-                                type="text"
-                                maxW="5rem"
-                                maxH="3rem"
-                                name="beds"
-                                value={form.rooms_busy}
-                                onChange={handleChange}
-                              />
-                            </FormControl>
+                            <FormInput
+                              title="Occupied Bed Rooms"
+                              name="beds"
+                              value={form.rooms_busy}
+                              type="number"
+                              handleChange={handleChange}
+                            />
                           </>
                         )}
-                        <FormControl>
-                          <FormLabel>Baths</FormLabel>
-                          <Input
-                            type="number"
-                            maxW="5rem"
-                            maxH="3rem"
-                            name="beds"
-                            value={form.baths}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel>Total Floors</FormLabel>
-                          <Input
-                            type="number"
-                            maxW="5rem"
-                            maxH="3rem"
-                            name="beds"
-                            value={form.total_floors}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                        <Text fontSize="md" mr="2">
-                          Total Floors
-                        </Text>
-                        <Input
-                          type="text"
-                          maxW="5rem"
-                          maxH="3rem"
-                          name="total_floors"
-                          value={form.total_floors}
-                          onChange={handleChange}
+                        <FormInput
+                          title="Bath Rooms"
+                          name="baths"
+                          value={form.baths}
+                          type="number"
+                          handleChange={handleChange}
                         />
-                        <FormLabel />
-                        {form.type_type === 'appartment' ? (
+                        {form.type_type === 'appartment' && (
                           <>
-                            <Text fontSize="md" mr="2">
-                              Apartment Floor
-                            </Text>
-                            <Input
-                              type="text"
-                              maxW="5rem"
-                              maxH="3rem"
+                            <FormInput
+                              title="Apartment Floor"
                               name="apartment_floor"
                               value={form.apartment_floor}
-                              onChange={handleChange}
+                              type="number"
+                              handleChange={handleChange}
                             />
-                            <FormLabel />
                           </>
-                        ) : (
-                          ''
                         )}
-                        <Text fontSize="md" mr="2">
-                          Balconies
-                        </Text>
-                        <Input
-                          type="text"
-                          maxW="5rem"
-                          maxH="3rem"
+                        <FormInput
+                          title="Total Floors"
+                          name="total_floors"
+                          value={form.total_floors}
+                          type="number"
+                          handleChange={handleChange}
+                        />
+                        <FormInput
+                          title="Balconies"
                           name="balconies"
                           value={form.balconies}
-                          onChange={handleChange}
+                          type="number"
+                          handleChange={handleChange}
                         />
-                        <FormLabel />
-                        <Text fontSize="md" mr="2">
-                          Year Built
-                        </Text>
-                        <Input
-                          type="text"
-                          maxW="5rem"
-                          maxH="3rem"
+                        <FormInput
+                          title="Year Built"
                           name="year_built"
                           value={form.year_built}
-                          onChange={handleChange}
+                          type="number"
+                          handleChange={handleChange}
                         />
-                        <FormLabel />
                         <Checkbox
                           colorScheme="green"
                           ml="2"
@@ -591,12 +535,9 @@ export default function ListAHome() {
                     {form.listing_type === 'sale' ? (
                       <>
                         <InputGroup isRequired>
-                          <InputLeftElement
-                            pointerEvents="none"
-                            color="gray.300"
-                            fontSize="1.2em"
-                            children="$"
-                          />
+                          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
+                            ₪
+                          </InputLeftElement>
                           <Input
                             type="text"
                             maxW="15rem"
@@ -611,12 +552,9 @@ export default function ListAHome() {
                     ) : (
                       <>
                         <InputGroup isRequired>
-                          <InputLeftElement
-                            pointerEvents="none"
-                            color="gray.300"
-                            fontSize="1.2em"
-                            children="$"
-                          />
+                          <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
+                            ₪
+                          </InputLeftElement>
                           <Input
                             type="text"
                             maxW="15rem"
@@ -631,12 +569,9 @@ export default function ListAHome() {
                     )}
                     <FormLabel />
                     <InputGroup>
-                      <InputLeftElement
-                        pointerEvents="none"
-                        color="gray.300"
-                        fontSize="1.2em"
-                        children="$"
-                      />
+                      <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
+                        ₪
+                      </InputLeftElement>
                       <Input
                         type="text"
                         maxW="15rem"
@@ -649,12 +584,9 @@ export default function ListAHome() {
                     </InputGroup>
                     <FormLabel />
                     <InputGroup>
-                      <InputLeftElement
-                        pointerEvents="none"
-                        color="gray.300"
-                        fontSize="1.2em"
-                        children="$"
-                      />
+                      <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
+                        ₪
+                      </InputLeftElement>
                       <Input
                         type="text"
                         maxW="15rem"
@@ -675,7 +607,7 @@ export default function ListAHome() {
                             pointerEvents="none"
                             color="gray.300"
                             fontSize="1.2em"
-                            children="$"
+                            children="₪"
                           />
                           <Input
                             type="text"
