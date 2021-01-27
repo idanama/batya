@@ -96,7 +96,6 @@ export default function Search() {
               </MenuList>
             </Menu>
             <IconButton aria-label="find" icon={<FaSearch />} size="md" colorScheme="blue" />
-            <DateAvailable />
           </HStack>
         </FormControl>
         <HStack spacing={2} p={2}>
