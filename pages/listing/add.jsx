@@ -671,6 +671,15 @@ export default function ListAHome() {
             <AccordionItem>
               <AccordionButton>
                 <Box flex="1" textAlign="left">
+                  Photos
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>Photos here</AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
                   Publish
                 </Box>
                 <AccordionIcon />
