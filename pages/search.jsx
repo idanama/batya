@@ -19,6 +19,7 @@ import Head from 'next/head';
 import { FaSearch } from 'react-icons/fa';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import Card from '../components/Card';
+import DateAvailable from '../components/DateAvailable';
 
 export default function Search() {
   return (
@@ -116,7 +117,6 @@ export default function Search() {
       </Flex>
       <SimpleGrid minChildWidth="300px" spacing={4} p={4}>
         <Card />
-        <Skeleton height="320px" />
         <Skeleton height="320px" />
         <Skeleton height="320px" />
         <Skeleton height="320px" />

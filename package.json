@@ -26,6 +26,7 @@
     "next-auth": "^3.1.0",
     "next-connect": "^0.9.1",
     "react": "17.0.1",
+    "react-datepicker": "^3.4.1",
     "react-dom": "17.0.1",
     "react-dropzone": "^11.2.4",
     "react-icons": "^4.1.0",
