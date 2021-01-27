@@ -2,7 +2,7 @@ import { Badge, Box, Image, Text, Stack } from '@chakra-ui/react';
 
 export default function Card({ listing = {} }) {
   return (
-    <Box rounded="20px" overflow="hidden" boxShadow="lg">
+    <Box rounded="md" overflow="hidden" boxShadow="lg">
       <Image
         src="https://i.pinimg.com/originals/37/c0/84/37c084c0a98a8aba89c3483d3f19ad03.jpg"
         alt="Housing Image"
