@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { Box, Text } from '@chakra-ui/react';
 
 const thumbsContainer = {
   display: 'flex',
@@ -63,13 +64,20 @@ export function Dropzone(props) {
     [files]
   );
 
+  useEffect(() => {
+    props.handleFiles(files);
+  }, [files]);
+
   return (
     <section className="container">
-      <div {...getRootProps({ className: 'dropzone' })}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      </div>
-      <aside style={thumbsContainer}>{thumbs}</aside>
+      <Box shadow="base" minH="8rem" p={4}>
+        <div {...getRootProps({ className: 'dropzone' })}>
+          <input {...getInputProps()} />
+          <Text mb={4}>Drag 'n' drop photos here, or click to select them from you device</Text>
+          {thumbs}
+        </div>
+      </Box>
+      {/* <aside style={thumbsContainer}></aside> */}
     </section>
   );
 }
