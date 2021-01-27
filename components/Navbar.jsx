@@ -3,36 +3,29 @@ import {
   Box,
   Container,
   Text,
-  Flex,
   Button,
   Grid,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  useDisclosure,
 } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useSession } from 'next-auth/client';
+import { signOut, useSession } from 'next-auth/client';
 
 import ThemeSelector from './ThemeSelector';
 import CustomModal from './Modal';
 import Logo from './Logo';
-// import { LoginArea } from './Signin';
 import SignUp from './Signup';
-// import Auth from './Auth';
-import Auth from '../pages/auth';
+import SignIn from './Signin';
 
 export default function Navbar() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modal, setModal] = useState(null);
 
-  const [isSignin, setIsSignin] = useState(true);
-  function modalHandler(signInstate) {
-    setIsSignin(signInstate);
-    onOpen();
-  }
+  const handleModal = (name) => {
+    setModal(name);
+  };
 
   const [session, loading] = useSession();
   useEffect(() => {}, [session]);
@@ -71,20 +64,37 @@ export default function Navbar() {
                 </Container>
               </MenuButton>
               <MenuList style={{ zIndex: '50' }}>
-                {session && <MenuItem>{`Signed in as ${session.user.email}`}</MenuItem>}
-                <MenuItem>
-                  <Auth session={session} />
-                </MenuItem>
-                <MenuItem id="mnuSignup" onClick={() => modalHandler(false)}>
-                  Register
-                </MenuItem>
+                {session && (
+                  <>
+                    <Text px={3} py={1} opacity={0.8}>
+                      {`Signed in as ${session.user.email}`}
+                    </Text>
+                    <MenuItem onClick={signOut}>Sign out</MenuItem>
+                  </>
+                )}
+                {!session && (
+                  <>
+                    <Text px={3} py={1} opacity={0.8}>
+                      Not signed in
+                    </Text>
+                    <MenuItem id="mnuSignup" onClick={() => handleModal('signin')}>
+                      Sign In
+                    </MenuItem>
+                    <MenuItem id="mnuSignup" onClick={() => handleModal('signup')}>
+                      Sign Up
+                    </MenuItem>
+                  </>
+                )}
               </MenuList>
             </Menu>
           </Grid>
         </Container>
       </Box>
-      <CustomModal isOpen={isOpen} onClose={onClose}>
+      <CustomModal isOpen={modal === 'signup'} onClose={() => handleModal(null)}>
         <SignUp />
+      </CustomModal>
+      <CustomModal isOpen={modal === 'signin'} onClose={() => handleModal(null)}>
+        <SignIn />
       </CustomModal>
     </nav>
   );

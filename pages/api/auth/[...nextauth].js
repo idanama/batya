@@ -3,6 +3,19 @@ import Providers from 'next-auth/providers';
 import { query } from '../../../lib/db';
 
 const options = {
+  events: {
+    signIn: async (message) => console.log(message),
+    signOut: async (message) => console.log(message),
+    createUser: async (message) => console.log(message),
+    linkAccount: async (message) => console.log(message),
+    session: async (message) => console.log(message),
+    error: async (message) => console.log(message),
+  },
+  pages: {
+    signIn: '/auth/signin',
+    signOut: '/auth/signout',
+    newUser: '/search'
+  },
   providers: [
     // OAuth authentication providers...
     Providers.Apple({
@@ -58,7 +71,7 @@ const options = {
         console.log(user, msg);
         if (user) {
           // Any user object returned here will be saved in the JSON Web Token
-
+          console.log('resolved')
           return Promise.resolve({ user: { ...user.RowDataPacket } });
         } else {
           return Promise.reject(msg);

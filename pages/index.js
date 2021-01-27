@@ -13,7 +13,6 @@ import {
 import Head from 'next/head';
 import Image from 'next/image';
 import { FaSearch } from 'react-icons/fa';
-import Auth from './auth';
 
 export default function Home() {
   const { colorMode } = useColorMode();
