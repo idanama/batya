@@ -2,7 +2,7 @@ const formidable = require('formidable');
 
 import { query } from '../../lib/db';
 import { parser } from './imgUpload';
-
+import fs from 'fs';
 // main function to handle different request methods for route api/properties.
 
 export const config = {
@@ -28,27 +28,23 @@ export default function handler(req, res) {
 }
 
 // async function imageUploadHandler(req, res) {
-//   parser.single('image');
+//   parser.single('img');
 // }
+
 export async function addProperty(req, res) {
-  const form = formidable({ multiples: true });
-
-  parser.single('img')(req, res, (err) => {
-    if (err) console.log(err);
-  });
-
-  form.parse(req, (err, fields, files) => {
-    console.log(fields, files);
-  });
-
-  const { property } = req.body;
-  console.log(req.body.sqm);
   try {
-    if (!property) {
-      return res.status(400).json({ message: 'must send a property' });
-    }
-    const results = await query(
-      `
+    parser.single('img')(req, res, (err) => {});
+    const path = req.file.path;
+    console.log(path);
+    const form = formidable({ multiples: true });
+    form.parse(req, async (err, fields, files) => {
+      console.log(fields, err, 'im here');
+      const property = {};
+      if (!property) {
+        return res.status(400).json({ message: 'must send a property' });
+      }
+      const results = await query(
+        `
       INSERT INTO property (
         ${Object.keys(property).join(', ')}
      )
@@ -56,11 +52,14 @@ export async function addProperty(req, res) {
         .map(() => '? ')
         .join(',')})
       `,
-      Object.values(property)
-    );
+        Object.values(property)
+      );
 
-    property.id = results.insertId;
-    return res.json({ message: 'property added successfully', property });
+      property.id = results.insertId;
+      return res.json({ message: 'property added successfully', property });
+    });
+
+    if (err) console.log(err);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

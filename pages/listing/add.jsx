@@ -28,6 +28,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import Card from '../../components/Card';
+import { Dropzone } from '../../components/dropzone';
 
 function AccordionButtons({ position, changeStep, ok }) {
   return (
@@ -43,9 +44,7 @@ function AccordionButtons({ position, changeStep, ok }) {
   );
 }
 
-function AccordionTitle({
-  children, position, ok, changeStep,
-}) {
+function AccordionTitle({ children, position, ok, changeStep }) {
   const handleClick = () => {
     changeStep(position);
   };
@@ -62,9 +61,7 @@ function AccordionTitle({
   );
 }
 
-function FormInput({
-  isRequired = false, name, title, type = 'text', handleChange, value,
-}) {
+function FormInput({ isRequired = false, name, title, type = 'text', handleChange, value }) {
   return (
     <FormControl id={name} isRequired={isRequired}>
       <FormLabel>{title}</FormLabel>
@@ -224,24 +221,12 @@ export default function ListAHome() {
                               type="number"
                             />
                             <FormInput
-                              name="appartment_number"
-                              title="Apartment Number"
+                              name="entrance"
+                              title="Entrance"
                               handleChange={handleChange}
                               value={form.entrance}
                               type="number"
                             />
-                            <FormControl id="entrance">
-                              <FormLabel fontSize="md" mr="2">
-                                Entrance
-                              </FormLabel>
-                              <Input
-                                type="number"
-                                maxW="3rem"
-                                name="entrance"
-                                value={form.entrance}
-                                onChange={handleChange}
-                              />
-                            </FormControl>
                           </>
                         )}
                       </Stack>
@@ -276,32 +261,31 @@ export default function ListAHome() {
                             </HStack>
                           </RadioGroup>
                         </FormControl>
-                        <FormControl>
-                          <FormLabel>Size</FormLabel>
-                          <Input
-                            type="text"
-                            maxW="5rem"
-                            maxH="3rem"
-                            name="sqm"
-                            value={form.sqm}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
+                        <FormInput
+                          title="Size"
+                          name="sqm"
+                          handleChange={handleChange}
+                          value={form.sqm}
+                          type="number"
+                        />
                         {form.type_type === 'house' && (
                           <>
-                            <FormControl>
-                              <FormLabel>Lot Size</FormLabel>
-                              <Input
-                                type="text"
-                                maxW="5rem"
-                                maxH="3rem"
-                                name="sqm"
-                                value={form.lot_size}
-                                onChange={handleChange}
-                              />
-                            </FormControl>
+                            <FormInput
+                              title="Lot Size"
+                              name="lot_size"
+                              handleChange={handleChange}
+                              value={form.lot_size}
+                              type="number"
+                            />
                           </>
                         )}
+                        <FormInput
+                          title="Rooms"
+                          name="lot_size"
+                          handleChange={handleChange}
+                          value={form.lot_size}
+                          type="number"
+                        />
                         <FormControl>
                           <FormLabel>Rooms</FormLabel>
                           <Input
@@ -715,7 +699,7 @@ export default function ListAHome() {
                   Photos
                 </AccordionTitle>
                 <AccordionPanel pb={4}>
-                  Photos here
+                  <Dropzone />
                   <AccordionButtons position={6} changeStep={changeStep} ok={checks[6]} />
                 </AccordionPanel>
               </AccordionItem>
@@ -739,230 +723,156 @@ export default function ListAHome() {
                       >
                         <Stack isInline align="baseline" spacing={4} flexWrap="wrap">
                           <Text ml={4} mb={2}>
-                            <u>Type:</u>
-                            {' '}
-                            <b>{form.listing_type}</b>
+                            <u>Type:</u> <b>{form.listing_type}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>City:</u>
-                            {' '}
-                            <b>{form.city}</b>
+                            <u>City:</u> <b>{form.city}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Neighbourhood:</u>
-                            {' '}
-                            <b>{form.neighbourhood}</b>
+                            <u>Neighbourhood:</u> <b>{form.neighbourhood}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Street:</u>
-                            {' '}
-                            <b>{form.street}</b>
+                            <u>Street:</u> <b>{form.street}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Home Number:</u>
-                            {' '}
-                            <b>{form.home_number}</b>
+                            <u>Home Number:</u> <b>{form.home_number}</b>
                           </Text>
                           {form.type_type === 'appartment' ? (
                             <>
                               <Text mb={2}>
-                                <u>Apartment Number:</u>
-                                {' '}
-                                <b>{form.appartment_number}</b>
+                                <u>Apartment Number:</u> <b>{form.appartment_number}</b>
                               </Text>
                             </>
                           ) : (
                             ''
                           )}
                           <Text mb={2}>
-                            <u>Entrance:</u>
-                            {' '}
-                            <b>{form.entrance}</b>
+                            <u>Entrance:</u> <b>{form.entrance}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Housing Type:</u>
-                            {' '}
-                            <b>{form.type_type}</b>
+                            <u>Housing Type:</u> <b>{form.type_type}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Size:</u>
-                            {' '}
-                            <b>{form.sqm}</b>
+                            <u>Size:</u> <b>{form.sqm}</b>
                           </Text>
                           {form.type_type === 'house' ? (
                             <>
                               <Text mb={2}>
-                                <u>Lot Size:</u>
-                                {' '}
-                                <b>{form.lot_size}</b>
+                                <u>Lot Size:</u> <b>{form.lot_size}</b>
                               </Text>
                             </>
                           ) : (
                             ''
                           )}
                           <Text mb={2}>
-                            <u>Rooms:</u>
-                            {' '}
-                            <b>{form.rooms}</b>
+                            <u>Rooms:</u> <b>{form.rooms}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Beds:</u>
-                            {' '}
-                            <b>{form.beds}</b>
+                            <u>Beds:</u> <b>{form.beds}</b>
                           </Text>
                           {form.listing_type === 'roommates' ? (
                             <>
                               <Text mb={2}>
-                                <u>Beds Busy:</u>
-                                {' '}
-                                <b>{form.rooms_busy}</b>
+                                <u>Beds Busy:</u> <b>{form.rooms_busy}</b>
                               </Text>
                             </>
                           ) : (
                             ''
                           )}
                           <Text mb={2}>
-                            <u>Baths:</u>
-                            {' '}
-                            <b>{form.baths}</b>
+                            <u>Baths:</u> <b>{form.baths}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Total Floors:</u>
-                            {' '}
-                            <b>{form.total_floors}</b>
+                            <u>Total Floors:</u> <b>{form.total_floors}</b>
                           </Text>
                           {form.type_type === 'appartment' ? (
                             <>
                               <Text mb={2}>
-                                <u>Apartment Floor:</u>
-                                {' '}
-                                <b>{form.apartment_floor}</b>
+                                <u>Apartment Floor:</u> <b>{form.apartment_floor}</b>
                               </Text>
                             </>
                           ) : (
                             ''
                           )}
                           <Text mb={2}>
-                            <u>Balconies:</u>
-                            {' '}
-                            <b>{form.balconies}</b>
+                            <u>Balconies:</u> <b>{form.balconies}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Year Built:</u>
-                            {' '}
-                            <b>{form.year_built}</b>
+                            <u>Year Built:</u> <b>{form.year_built}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Renovated:</u>
-                            {' '}
-                            <b>{form.renovated ? 'Yes' : 'No'}</b>
+                            <u>Renovated:</u> <b>{form.renovated ? 'Yes' : 'No'}</b>
                           </Text>
                           {form.listing_type === 'sale' ? (
                             ''
                           ) : (
                             <>
                               <Text mb={2}>
-                                <u>Pets:</u>
-                                {' '}
-                                <b>{form.pets}</b>
+                                <u>Pets:</u> <b>{form.pets}</b>
                               </Text>
                             </>
                           )}
                           <Text mb={2}>
-                            <u>View:</u>
-                            {' '}
-                            <b>{form.view}</b>
+                            <u>View:</u> <b>{form.view}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Other Details:</u>
-                            {' '}
-                            <b>{form.details}</b>
+                            <u>Other Details:</u> <b>{form.details}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Parking:</u>
-                            {' '}
-                            <b>{form.parking_name}</b>
+                            <u>Parking:</u> <b>{form.parking_name}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Elevator:</u>
-                            {' '}
-                            <b>{form.elevator ? 'Yes' : 'No'}</b>
+                            <u>Elevator:</u> <b>{form.elevator ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Storage:</u>
-                            {' '}
-                            <b>{form.storage ? 'Yes' : 'No'}</b>
+                            <u>Storage:</u> <b>{form.storage ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Shelter:</u>
-                            {' '}
-                            <b>{form.shelter ? 'Yes' : 'No'}</b>
+                            <u>Shelter:</u> <b>{form.shelter ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Mamad:</u>
-                            {' '}
-                            <b>{form.mamad ? 'Yes' : 'No'}</b>
+                            <u>Mamad:</u> <b>{form.mamad ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Cooling:</u>
-                            {' '}
-                            <b>{form.cooling ? 'Yes' : 'No'}</b>
+                            <u>Cooling:</u> <b>{form.cooling ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Heating:</u>
-                            {' '}
-                            <b>{form.heating ? 'Yes' : 'No'}</b>
+                            <u>Heating:</u> <b>{form.heating ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Solar Water:</u>
-                            {' '}
-                            <b>{form.solar_water ? 'Yes' : 'No'}</b>
+                            <u>Solar Water:</u> <b>{form.solar_water ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Furnitures:</u>
-                            {' '}
-                            <b>{form.furnished ? 'Yes' : 'No'}</b>
+                            <u>Furnitures:</u> <b>{form.furnished ? 'Yes' : 'No'}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Wheelchair:</u>
-                            {' '}
-                            <b>{form.wheelchair ? 'Yes' : 'No'}</b>
+                            <u>Wheelchair:</u> <b>{form.wheelchair ? 'Yes' : 'No'}</b>
                           </Text>
                           {form.listing_type === 'sale' ? (
                             <>
                               <Text mb={2}>
-                                <u>Price:</u>
-                                {' '}
-                                <b>{form.price}</b>
+                                <u>Price:</u> <b>{form.price}</b>
                               </Text>
                             </>
                           ) : (
                             <>
                               <Text mb={2}>
-                                <u>Month Price:</u>
-                                {' '}
-                                <b>{form.price_month}</b>
+                                <u>Month Price:</u> <b>{form.price_month}</b>
                               </Text>
                             </>
                           )}
                           <Text mb={2}>
-                            <u>Property Tax:</u>
-                            {' '}
-                            <b>{form.arnona}</b>
+                            <u>Property Tax:</u> <b>{form.arnona}</b>
                           </Text>
                           <Text mb={2}>
-                            <u>Vaad Bait:</u>
-                            {' '}
-                            <b>{form.vaadbait}</b>
+                            <u>Vaad Bait:</u> <b>{form.vaadbait}</b>
                           </Text>
                           {form.listing_type === 'sale' ? (
                             ''
                           ) : (
                             <>
                               <Text mb={2}>
-                                <u>Deposit:</u>
-                                {' '}
-                                <b>{form.deposit}</b>
+                                <u>Deposit:</u> <b>{form.deposit}</b>
                               </Text>
                             </>
                           )}
