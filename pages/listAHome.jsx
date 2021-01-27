@@ -189,9 +189,7 @@ export default function ListAHome() {
                       ) : (
                         <span />
                       )}
-                      <Text fontSize="md">
-                        Entrance
-                      </Text>
+                      <Text fontSize="md">Entrance</Text>
                       <Input
                         type="text"
                         maxW="5rem"
@@ -217,7 +215,9 @@ export default function ListAHome() {
                 <FormControl>
                   <InputGroup>
                     <Stack align="baseline">
-                      <Text fontSize="md" mb="1">Housing Type</Text>
+                      <Text fontSize="md" mb="1">
+                        Housing Type
+                      </Text>
                       <RadioGroup value={form.type_type}>
                         <HStack spacing="24px">
                           <Radio onChange={handleChange} name="type_type" value="house">
@@ -679,9 +679,16 @@ export default function ListAHome() {
                 <FormControl>
                   <Stack isInline>
                     <Stack maxW="300px" maxH="400px">
-                      <Card form={form} />
+                      <Card listing={form} />
                     </Stack>
-                    <Box direction="row" maxW="700px" rounded="20px" fontSize="md" boxShadow="lg" p={3}>
+                    <Box
+                      direction="row"
+                      maxW="700px"
+                      rounded="20px"
+                      fontSize="md"
+                      boxShadow="lg"
+                      p={3}
+                    >
                       <Stack isInline align="baseline" spacing={4} flexWrap="wrap">
                         <Text ml={4} mb={2}>
                           <u>Type:</u> <b>{form.listing_type}</b>
@@ -705,7 +712,7 @@ export default function ListAHome() {
                             </Text>
                           </>
                         ) : (
-                          ""
+                          ''
                         )}
                         <Text mb={2}>
                           <u>Entrance:</u> <b>{form.entrance}</b>
@@ -723,7 +730,7 @@ export default function ListAHome() {
                             </Text>
                           </>
                         ) : (
-                          ""
+                          ''
                         )}
                         <Text mb={2}>
                           <u>Rooms:</u> <b>{form.rooms}</b>
@@ -738,7 +745,7 @@ export default function ListAHome() {
                             </Text>
                           </>
                         ) : (
-                          ""
+                          ''
                         )}
                         <Text mb={2}>
                           <u>Baths:</u> <b>{form.baths}</b>
@@ -753,7 +760,7 @@ export default function ListAHome() {
                             </Text>
                           </>
                         ) : (
-                          ""
+                          ''
                         )}
                         <Text mb={2}>
                           <u>Balconies:</u> <b>{form.balconies}</b>
@@ -762,10 +769,10 @@ export default function ListAHome() {
                           <u>Year Built:</u> <b>{form.year_built}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Renovated:</u> <b>{form.renovated ? "Yes" : "No"}</b>
+                          <u>Renovated:</u> <b>{form.renovated ? 'Yes' : 'No'}</b>
                         </Text>
                         {form.listing_type === 'sale' ? (
-                          ""
+                          ''
                         ) : (
                           <>
                             <Text mb={2}>
@@ -783,31 +790,31 @@ export default function ListAHome() {
                           <u>Parking:</u> <b>{form.parking_name}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Elevator:</u> <b>{form.elevator ? "Yes" : "No"}</b>
+                          <u>Elevator:</u> <b>{form.elevator ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Storage:</u> <b>{form.storage ? "Yes" : "No"}</b>
+                          <u>Storage:</u> <b>{form.storage ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Shelter:</u> <b>{form.shelter ? "Yes" : "No"}</b>
+                          <u>Shelter:</u> <b>{form.shelter ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Mamad:</u> <b>{form.mamad ? "Yes" : "No"}</b>
+                          <u>Mamad:</u> <b>{form.mamad ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Cooling:</u> <b>{form.cooling ? "Yes" : "No"}</b>
+                          <u>Cooling:</u> <b>{form.cooling ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Heating:</u> <b>{form.heating ? "Yes" : "No"}</b>
+                          <u>Heating:</u> <b>{form.heating ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Solar Water:</u> <b>{form.solar_water ? "Yes" : "No"}</b>
+                          <u>Solar Water:</u> <b>{form.solar_water ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Furnitures:</u> <b>{form.furnished ? "Yes" : "No"}</b>
+                          <u>Furnitures:</u> <b>{form.furnished ? 'Yes' : 'No'}</b>
                         </Text>
                         <Text mb={2}>
-                          <u>Wheelchair:</u> <b>{form.wheelchair ? "Yes" : "No"}</b>
+                          <u>Wheelchair:</u> <b>{form.wheelchair ? 'Yes' : 'No'}</b>
                         </Text>
                         {form.listing_type === 'sale' ? (
                           <>
@@ -829,7 +836,7 @@ export default function ListAHome() {
                           <u>Vaad Bait:</u> <b>{form.vaadbait}</b>
                         </Text>
                         {form.listing_type === 'sale' ? (
-                          ""
+                          ''
                         ) : (
                           <>
                             <Text mb={2}>
