@@ -221,24 +221,12 @@ export default function ListAHome() {
                               type="number"
                             />
                             <FormInput
-                              name="appartment_number"
-                              title="Apartment Number"
+                              name="entrance"
+                              title="Entrance"
                               handleChange={handleChange}
                               value={form.entrance}
                               type="number"
                             />
-                            <FormControl id="entrance">
-                              <FormLabel fontSize="md" mr="2">
-                                Entrance
-                              </FormLabel>
-                              <Input
-                                type="number"
-                                maxW="3rem"
-                                name="entrance"
-                                value={form.entrance}
-                                onChange={handleChange}
-                              />
-                            </FormControl>
                           </>
                         )}
                       </Stack>
@@ -273,32 +261,31 @@ export default function ListAHome() {
                             </HStack>
                           </RadioGroup>
                         </FormControl>
-                        <FormControl>
-                          <FormLabel>Size</FormLabel>
-                          <Input
-                            type="text"
-                            maxW="5rem"
-                            maxH="3rem"
-                            name="sqm"
-                            value={form.sqm}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
+                        <FormInput
+                          title="Size"
+                          name="sqm"
+                          handleChange={handleChange}
+                          value={form.sqm}
+                          type="number"
+                        />
                         {form.type_type === 'house' && (
                           <>
-                            <FormControl>
-                              <FormLabel>Lot Size</FormLabel>
-                              <Input
-                                type="text"
-                                maxW="5rem"
-                                maxH="3rem"
-                                name="sqm"
-                                value={form.lot_size}
-                                onChange={handleChange}
-                              />
-                            </FormControl>
+                            <FormInput
+                              title="Lot Size"
+                              name="lot_size"
+                              handleChange={handleChange}
+                              value={form.lot_size}
+                              type="number"
+                            />
                           </>
                         )}
+                        <FormInput
+                          title="Rooms"
+                          name="lot_size"
+                          handleChange={handleChange}
+                          value={form.lot_size}
+                          type="number"
+                        />
                         <FormControl>
                           <FormLabel>Rooms</FormLabel>
                           <Input
@@ -708,16 +695,16 @@ export default function ListAHome() {
               </AccordionItem>
 
               <AccordionItem>
-                <AccordionTitle position={6} ok={checks[6]} changeStep={setStep}>
+                <AccordionTitle position={6} ok={checks[6]} changeStep={changeStep}>
                   Photos
                 </AccordionTitle>
                 <AccordionPanel pb={4}>
                   <Dropzone />
-                  <AccordionButtons position={6} changeStep={setStep} ok={checks[6]} />
+                  <AccordionButtons position={6} changeStep={changeStep} ok={checks[6]} />
                 </AccordionPanel>
               </AccordionItem>
               <AccordionItem>
-                <AccordionTitle position={7} ok={checks[7]} changeStep={setStep}>
+                <AccordionTitle position={7} ok={checks[7]} changeStep={changeStep}>
                   Publish
                 </AccordionTitle>
                 <AccordionPanel pb={4}>
