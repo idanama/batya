@@ -47,11 +47,6 @@ export default function Navbar() {
           </Link>
           <Grid autoFlow="column" gap="4" position="relative">
             <ThemeSelector />
-            <Link href="/listAHome" passHref>
-              <Button id="mnuAdd" variant="ghost">
-                Add Property
-              </Button>
-            </Link>
             <Link href="/search" passHref>
               <Button id="mnuBuy" variant="ghost">
                 Buy
@@ -60,6 +55,11 @@ export default function Navbar() {
             <Link href="/search" passHref>
               <Button id="mnuRent" variant="ghost">
                 Rent
+              </Button>
+            </Link>
+            <Link href="/listing/add" passHref>
+              <Button id="mnuAdd" variant="ghost">
+                List a Home
               </Button>
             </Link>
             <Menu style={{ zIndex: '50' }} placement="bottom-end">
