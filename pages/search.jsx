@@ -5,8 +5,6 @@ import {
   HStack,
   IconButton,
   Input,
-  InputGroup,
-  InputLeftElement,
   Menu,
   MenuButton,
   MenuDivider,
@@ -16,12 +14,10 @@ import {
   MenuOptionGroup,
   SimpleGrid,
   Skeleton,
-  Stack,
-  Text,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { FaSearch } from 'react-icons/fa';
-import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import Card from '../components/Card';
 
 export default function Search() {

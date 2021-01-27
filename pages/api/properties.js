@@ -1,6 +1,15 @@
+const formidable = require('formidable');
+
 import { query } from '../../lib/db';
+import { parser } from './imgUpload';
 
 // main function to handle different request methods for route api/properties.
+
+export const config = {
+  api: {
+    bodyParser: false, // Disallow body parsing, consume as stream
+  },
+};
 
 export default function handler(req, res) {
   switch (req.method) {
@@ -18,16 +27,22 @@ export default function handler(req, res) {
   }
 }
 
+// async function imageUploadHandler(req, res) {
+//   parser.single('image');
+// }
 export async function addProperty(req, res) {
-  const { property } = req.body;
-  console.log(Object.keys(property).join(', '));
-  console.log(Object.values(property));
-  console.log(
-    Object.keys(property)
-      .map(() => '? ')
-      .join(',')
-  );
+  const form = formidable({ multiples: true });
 
+  parser.single('img')(req, res, (err) => {
+    if (err) console.log(err);
+  });
+
+  form.parse(req, (err, fields, files) => {
+    console.log(fields, files);
+  });
+
+  const { property } = req.body;
+  console.log(req.body.sqm);
   try {
     if (!property) {
       return res.status(400).json({ message: 'must send a property' });
