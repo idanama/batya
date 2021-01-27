@@ -169,7 +169,12 @@ export default function ListAHome() {
     e.preventDefault();
     const formData = new FormData();
     Object.keys(form).forEach((key) => {
-      if (form[key] !== '') {
+      if (key === 'photos') {
+        // Object.keys(form.photos).forEach((photo) => {
+        form[key].forEach((photo, i) => {
+          formData.append(`photo${i}`, photo);
+        });
+      } else if (form[key] !== '') {
         formData.append(key, form[key]);
       }
     });
