@@ -3,14 +3,6 @@ import Providers from 'next-auth/providers';
 import { query } from '../../../lib/db';
 
 const options = {
-  events: {
-    signIn: async (message) => console.log(message),
-    signOut: async (message) => console.log(message),
-    createUser: async (message) => console.log(message),
-    linkAccount: async (message) => console.log(message),
-    session: async (message) => console.log(message),
-    error: async (message) => console.log(message),
-  },
   pages: {
     signIn: '/auth/signin',
     signOut: '/auth/signout',
@@ -61,17 +53,16 @@ const options = {
             `,
             credentials.username
           );
-          console.log(user);
+          // console.log(user);
           if (user.length === 0) {
             return null;
           }
         } catch (e) {
           msg = e.message;
         }
-        console.log(user, msg);
+        // console.log(user, msg);
         if (user) {
           // Any user object returned here will be saved in the JSON Web Token
-          console.log('resolved')
           return Promise.resolve(Object.assign({},user[0] ));
         } else {
           return Promise.reject(msg);
