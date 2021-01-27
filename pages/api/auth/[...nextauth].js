@@ -72,7 +72,7 @@ const options = {
         if (user) {
           // Any user object returned here will be saved in the JSON Web Token
           console.log('resolved')
-          return Promise.resolve({ user: { ...user.RowDataPacket } });
+          return Promise.resolve(Object.assign({},user[0] ));
         } else {
           return Promise.reject(msg);
         }
