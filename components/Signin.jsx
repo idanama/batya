@@ -64,7 +64,7 @@ const SignInForm = ({ providers }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSignIn = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const { username, password } = form;
     signIn('credentials', { username, password });
@@ -103,7 +103,13 @@ const SignInForm = ({ providers }) => {
             </Link>
           </Box>
         </Stack>
-        <Button colorScheme={VARIANT_COLOR} width="full" mt={4} onClick={handleSignIn}>
+        <Button
+          colorScheme={VARIANT_COLOR}
+          width="full"
+          mt={4}
+          onClick={handleSubmit}
+          type="submit"
+        >
           Sign In
         </Button>
       </form>
