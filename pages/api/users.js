@@ -22,7 +22,7 @@ export async function addUser(req, res) {
   const { user } = req.body;
 
   try {
-    if (!user) {
+    if (!user || !user.first_name || !user.last_name || !user.email || !user.password) {
       return res.status(400).json({ message: 'must send a user' });
     }
     const array = [];
@@ -40,7 +40,7 @@ export async function addUser(req, res) {
       password)
       VALUES (?,?,?,?,?,?)
       `,
-      array
+      array,
     );
     console.log(results);
     user.id = results.insertId;
