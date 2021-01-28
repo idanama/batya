@@ -175,7 +175,13 @@ export default function ListAHome() {
           formData.append(`photo${i}`, photo);
         });
       } else if (form[key] !== '') {
-        formData.append(key, form[key]);
+        if (key === 'mamad') {
+          formData.append('shelter', form[key]);
+        } else if (key === 'listing_type') {
+          formData.append('type_type', form[key]);
+        } else {
+          formData.append(key, form[key]);
+        }
       }
     });
     const res = await fetch('/api/properties', { method: 'POST', body: formData });
