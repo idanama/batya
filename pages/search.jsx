@@ -18,10 +18,28 @@ import {
 import Head from 'next/head';
 import { FaSearch } from 'react-icons/fa';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useState, useEffect } from 'react';
 import Card from '../components/Card';
-import DateAvailable from '../components/DateAvailable';
+
+import MockData from '../mock/results';
 
 export default function Search() {
+  const [saved, setSaved] = useState({});
+  const [results, setResults] = useState(Array(24).fill(undefined));
+
+  const handleSave = (id) => {
+    if (saved[id]) {
+      setSaved({ ...saved, [id]: false });
+    } else {
+      setSaved({ ...saved, [id]: true });
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setResults(MockData);
+    }, 2000);
+  }, []);
   return (
     <div>
       <Head>
@@ -115,22 +133,18 @@ export default function Search() {
           </Menu>
         </HStack>
       </Flex>
-      <SimpleGrid minChildWidth="300px" spacing={4} p={4}>
-        <Card />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
-        <Skeleton height="320px" />
+      <SimpleGrid columns={[2, null, 4, null, 5, 6]} spacing={4} p={4}>
+        {results.map((item) => (
+          <Skeleton isLoaded={item} maxW="300px" height="320px">
+            {item && (
+              <Card
+                listing={item}
+                saved={saved[item.property_property_id]}
+                onSave={() => handleSave(item.property_property_id)}
+              />
+            )}
+          </Skeleton>
+        ))}
       </SimpleGrid>
     </div>
   );

@@ -1,39 +1,87 @@
-import { Badge, Box, Image, Text, Stack } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Image,
+  Text,
+  Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  IconButton,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Skeleton,
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import Listing from './Listing';
 
-export default function Card({ listing = {} }) {
+export default function Card({ listing, saved = false, onSave }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <Box rounded="md" overflow="hidden" boxShadow="lg">
-      <Image
-        src="https://i.pinimg.com/originals/37/c0/84/37c084c0a98a8aba89c3483d3f19ad03.jpg"
-        alt="Housing Image"
-        minHeight="200px"
-      />
-      <Box p={3}>
-        <Stack isInline align="baseline" justify="space-between">
-          {listing.listing_type === 'sale' ? (
-            <>
-              <Text as="h1" fontWeight="semibold" fontSize="md">
-                $ {listing.price}
-              </Text>
-            </>
-          ) : (
-            <Text as="h1" fontWeight="semibold" fontSize="md">
-              $ {listing.price_month}
-              /month
+    <Box h="100%">
+      <Box
+        rounded="md"
+        overflow="hidden"
+        boxShadow="lg"
+        onClick={onOpen}
+        cursor="pointer"
+        h="100%"
+        position="relative"
+      >
+        <Box position="absolute" top="0" right="0" p={2}>
+          <IconButton
+            isRound
+            aria-label="Save home"
+            icon={saved ? <FaHeart color="teal" /> : <FaRegHeart color="teal" />}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSave();
+            }}
+          />
+        </Box>
+        <Skeleton isLoaded={loaded} h="200px" w="100%">
+          <Image
+            src={listing.images[0]}
+            alt="Housing Image"
+            h="200px"
+            w="100%"
+            objectFit="cover"
+            onLoad={() => setLoaded(true)}
+          />
+        </Skeleton>
+        <Box p={3}>
+          <Stack isInline align="baseline" justify="space-between">
+            <Text fontSize="lg" as="h2">
+              {`${new Intl.NumberFormat().format(listing.price_month || listing.price)} ₪`}
             </Text>
-          )}
-
-          <Badge variant="solid" bgColor="blue" rounded="full" px={2}>
-            Est.Payment
-          </Badge>
-        </Stack>
-        <Text fontSize="md" py={2}>
-          {listing.beds} Beds | {listing.baths} Baths | {listing.sqm} m²
-        </Text>
-        <Text fontSize="sm">
-          {listing.home_number} {listing.street}, {listing.neighbourhood}, {listing.city}
-        </Text>
+            <Badge variant="solid" bgColor="blue" rounded="full" px={2}>
+              Est.Payment
+            </Badge>
+          </Stack>
+          <Text as="h3">
+            <Text textTransform="capitalize" display="inline">
+              {listing.type_type}
+            </Text>
+            {`, ${listing.sqm} m², ${listing.rooms} rooms.`}
+          </Text>
+          <Text fontSize="sm">{`${listing.street}, ${listing.city}`}</Text>
+        </Box>
       </Box>
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody>
+            <Listing listing={listing} modal />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
