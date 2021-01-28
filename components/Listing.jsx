@@ -216,7 +216,7 @@ export default function Listing() {
             }
             return (
               <GridItem colSpan={colSpan} rowSpan={rowSpan} key={url}>
-                <Skeleton isLoaded={imageLoader[url]} minH="300px">
+                <Skeleton isLoaded={imageLoader[url]} height="100%" width="100%" overflow="hidden">
                   <Img
                     onLoad={(e) => {
                       setImageLoader((imagesLoaded) => ({
