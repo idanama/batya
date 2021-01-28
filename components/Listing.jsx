@@ -4,18 +4,16 @@ import {
   Grid,
   Skeleton,
   Stack,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
   Text,
   GridItem,
   SimpleGrid,
   Box,
-  Heading,
-  Button,
-  Center,
   Img,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
 } from '@chakra-ui/react';
 import {
   FaBurn,
@@ -86,7 +84,7 @@ export default function Listing() {
     // user_user_id: 'user3',
     // property_property_id: 'property5'
     images: [
-      'https://picsum.photos/602/1000',
+      'https://picsum.photos/2002/1500',
       'https://picsum.photos/1000/601',
       'https://picsum.photos/1000/602',
       'https://picsum.photos/1000/605',
@@ -95,6 +93,7 @@ export default function Listing() {
   };
 
   const [imageLoader, setImageLoader] = useState({});
+  const [photoModal, setPhotoModal] = useState(null);
 
   const amneties = [
     {
@@ -228,12 +227,29 @@ export default function Listing() {
                     objectFit="cover"
                     height="100%"
                     width="100%"
+                    onClick={() => setPhotoModal(url)}
                   />
                 </Skeleton>
               </GridItem>
             );
           })}
         </Grid>
+        <Modal isOpen={photoModal} onClose={() => setPhotoModal(null)}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <ModalBody>
+              <Img
+                src={photoModal}
+                height="100%"
+                width="100%"
+                maxH="95vh"
+                maxW="95vw"
+                p="2.2rem 1rem 1rem 1rem"
+              />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
         <Box>
           <Text fontSize="4xl" as="h2">
             {`${new Intl.NumberFormat().format(listing.price_month)} ₪`}
