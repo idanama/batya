@@ -47,7 +47,7 @@ export default function Card({ listing, saved = false, onSave }) {
         </Box>
         <Skeleton isLoaded={loaded} h="200px" w="100%">
           <Image
-            src={listing.images[0]}
+            src={listing.images?.[0]}
             alt="Housing Image"
             h="200px"
             w="100%"
@@ -60,9 +60,11 @@ export default function Card({ listing, saved = false, onSave }) {
             <Text fontSize="lg" as="h2">
               {`${new Intl.NumberFormat().format(listing.price_month || listing.price)} ₪`}
             </Text>
-            <Badge variant="solid" bgColor="blue" rounded="full" px={2}>
-              Est.Payment
-            </Badge>
+            {listing.listing_type && (
+              <Badge variant="solid" bgColor="blue" rounded="full" px={2}>
+                {listing.listing_type}
+              </Badge>
+            )}
           </Stack>
           <Text as="h3">
             <Text textTransform="capitalize" display="inline">

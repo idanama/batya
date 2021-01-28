@@ -1,6 +1,6 @@
 const results = [
   {
-    for: 'sale',
+    listing_type: 'rental',
     property_id: 'property5',
     data_registered: 2,
     sqm: 85,

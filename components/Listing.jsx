@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Container,
   Grid,
@@ -13,9 +13,11 @@ import {
   ModalOverlay,
   ModalContent,
   ModalBody,
+  useClipboard,
   ModalCloseButton,
   IconButton,
   HStack,
+  useToast,
 } from '@chakra-ui/react';
 import {
   FaBurn,
@@ -199,6 +201,22 @@ export default function Listing({ listing, modal }) {
       name: 'pets',
     },
   ];
+  const { hasCopied, onCopy } = useClipboard(
+    `https://batya.vercel.app/listing/${listing.property_property_id}`
+  );
+  const toast = useToast();
+
+  useEffect(() => {
+    if (hasCopied) {
+      toast({
+        title: 'Copied link',
+        description: "We've copied the page link to your clipboard.",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }, [hasCopied]);
 
   return (
     <Container maxW="6xl" pt={3} pb={3}>
@@ -254,9 +272,7 @@ export default function Listing({ listing, modal }) {
         </Modal>
         <Box>
           <HStack spacing={4} mb={3}>
-            <IconButton variant="outline" icon={<FaHeart />} />
-            <IconButton variant="outline" icon={<FaRegHeart />} />
-            <IconButton variant="outline" icon={<FaLink />} />
+            <IconButton variant="outline" onClick={onCopy} icon={<FaLink />} />
             <IconButton variant="outline" icon={<FaPrint />} />
             <IconButton variant="outline" icon={<FaShare />} />
           </HStack>
