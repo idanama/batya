@@ -38,7 +38,7 @@ export default function Search() {
   useEffect(() => {
     setTimeout(() => {
       setResults(MockData);
-    }, 2000);
+    }, 1000);
   }, []);
   return (
     <div>
@@ -139,8 +139,8 @@ export default function Search() {
             {item && (
               <Card
                 listing={item}
-                saved={saved[item.property_property_id]}
-                onSave={() => handleSave(item.property_property_id)}
+                saved={saved[item.property_id]}
+                onSave={() => handleSave(item.property_id)}
               />
             )}
           </Skeleton>

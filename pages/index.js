@@ -8,14 +8,26 @@ import {
   Skeleton,
   Grid,
   Button,
+  SimpleGrid,
   useColorMode,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { FaSearch } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import Card from '../components/Card';
+
+import MockData from '../mock/results';
 
 export default function Home() {
   const { colorMode } = useColorMode();
+  const [results, setResults] = useState(Array(24).fill(undefined));
+
+  useEffect(() => {
+    setTimeout(() => {
+      setResults(MockData);
+    }, 350);
+  }, []);
 
   return (
     <div>
@@ -50,31 +62,34 @@ export default function Home() {
           className="filter-hero"
         />
       </Box>
-      <Container maxW="6xl" w="full" pt={4}>
+      {/* <Container maxW="6xl" w="full" pt={4}>
         <Text fontSize="xl">Latest listings</Text>
         <Grid templateColumns="repeat(3,1fr)" pt={2} pb={2} gap={4} height="2xs">
           <Skeleton />
           <Skeleton />
           <Skeleton />
         </Grid>
-      </Container>
-      <Container maxW="6xl" w="full" pt={4}>
-        <Text fontSize="xl">Recently viewed homes</Text>
-        <Grid templateColumns="2fr 1fr 1fr" pt={2} pb={2} gap={4} height="2xs">
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-        </Grid>
-      </Container>
-      <Container maxW="xl" mb="12" mt="12">
-        <Grid autoFlow="column" gap="12">
+      </Container> */}
+      <Container maxW="6xl" mb="12" mt="12">
+        <SimpleGrid columns={4} spacing={4} p={4}>
+          {results.slice(0, 4).map((item) => (
+            <Skeleton isLoaded={item} maxW="300px" height="320px">
+              {item && (
+              <Card
+                listing={item}
+              />
+              )}
+            </Skeleton>
+          ))}
+        </SimpleGrid>
+        {/* <Grid autoFlow="column" gap="12">
           <Button size="lg" variant="outline">
             Buy
           </Button>
           <Button size="lg" variant="outline">
             Rent
           </Button>
-        </Grid>
+        </Grid> */}
       </Container>
     </div>
   );

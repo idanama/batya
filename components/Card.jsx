@@ -61,7 +61,12 @@ export default function Card({ listing, saved = false, onSave }) {
               {`${new Intl.NumberFormat().format(listing.price_month || listing.price)} ₪`}
             </Text>
             {listing.listing_type && (
-              <Badge variant="solid" bgColor="blue" rounded="full" px={2}>
+              <Badge
+                variant="solid"
+                rounded="full"
+                px={2}
+                colorScheme={listing.listing_type === 'roommates' ? 'teal' : undefined}
+              >
                 {listing.listing_type}
               </Badge>
             )}
