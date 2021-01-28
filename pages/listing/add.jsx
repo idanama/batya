@@ -441,7 +441,7 @@ export default function ListAHome() {
                       </>
                     )}
                     <Checkbox
-                      colorScheme="green"
+                      colorScheme="teal"
                       ml="2"
                       name="renovated"
                       isChecked={form.renovated}
@@ -477,7 +477,7 @@ export default function ListAHome() {
                         </HStack>
                       </RadioGroup>
                       <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         ml="2"
                         name="elevator"
                         isChecked={form.elevator}
@@ -486,7 +486,7 @@ export default function ListAHome() {
                         Elevator
                       </Checkbox>
                       <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         name="storage"
                         ml="3"
                         isChecked={form.storage}
@@ -495,16 +495,7 @@ export default function ListAHome() {
                         Storage
                       </Checkbox>
                       <Checkbox
-                        colorScheme="green"
-                        name="shelter"
-                        ml={8}
-                        isChecked={form.shelter}
-                        onChange={handleCheck}
-                      >
-                        Shelter
-                      </Checkbox>
-                      <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         name="mamad"
                         ml={8}
                         isChecked={form.mamad}
@@ -526,7 +517,7 @@ export default function ListAHome() {
                   <FormControl>
                     <Stack spacing={4} py={4} direction="column">
                       <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         name="cooling"
                         isChecked={form.cooling}
                         onChange={handleCheck}
@@ -534,7 +525,7 @@ export default function ListAHome() {
                         Cooling
                       </Checkbox>
                       <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         name="heating"
                         isChecked={form.heating}
                         onChange={handleCheck}
@@ -542,7 +533,7 @@ export default function ListAHome() {
                         Heating
                       </Checkbox>
                       <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         name="solar_water"
                         isChecked={form.solar_water}
                         onChange={handleCheck}
@@ -550,7 +541,7 @@ export default function ListAHome() {
                         Solar Water
                       </Checkbox>
                       <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         name="furnished"
                         isChecked={form.furnished}
                         onChange={handleCheck}
@@ -558,7 +549,7 @@ export default function ListAHome() {
                         Furnished
                       </Checkbox>
                       <Checkbox
-                        colorScheme="green"
+                        colorScheme="teal"
                         name="wheelchair"
                         isChecked={form.wheelchair}
                         onChange={handleCheck}
